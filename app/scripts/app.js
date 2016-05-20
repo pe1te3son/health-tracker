@@ -5,4 +5,5 @@ $(function(){
 
   // Create an App
   new app.AppView();
+
 });
