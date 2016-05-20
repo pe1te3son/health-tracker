@@ -36,12 +36,21 @@
           <button type="submit" class="btn btn-primary search-button">Go</button>
         </form>
 
-        <div class="col-sm-6 search-result">
+        <div class="col-sm-6">
+          <ul class="search-result">
 
+          </ul>
         </div>
 
       </div><!-- row ends -->
     </div><!-- wrapper / container -->
+
+    <script type="text/template" id="item-template">
+      <li class="food-item">
+        <strong><%= name %></strong>
+        <p><%= calories %></p>
+      </li>
+    </script>
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
@@ -73,6 +82,7 @@
 
     <!-- build:js scripts/main.js -->
     <script src="scripts/models/food.js"></script>
+    <script src="scripts/collections/search-list.js"></script>
     <script src="scripts/collections/food-list.js"></script>
     <script src="scripts/views/app-view.js"></script>
     <script src="scripts/app.js"></script>

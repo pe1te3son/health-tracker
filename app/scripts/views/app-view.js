@@ -8,6 +8,7 @@ var app = app || {};
     el: '#app',
 
     initialize: function(){
+
     },
 
     events: {
@@ -18,6 +19,7 @@ var app = app || {};
     searchQuery: function(e){
       // Stops form from submiting
       e.preventDefault();
+      app.searchList.reset();
 
       var $val = $('#search-food').val();
       var id = "9fbd69c5";
@@ -29,13 +31,18 @@ var app = app || {};
       // Request data
       $.ajax(ajaxUrl)
       .done(function(data){
-        console.log(data.hits[0]);
+        console.log(data);
+
+        _.each(data.hits, function(item){
+          app.searchList.add({name: item.fields.item_name, calories: item.fields.nf_calories});
+        });
+        
       })
       .fail(function(){
         console.log('fail');
       });
 
-    } //searchQuery ends
+    }, //searchQuery ends
 
   }); // app ends
 
