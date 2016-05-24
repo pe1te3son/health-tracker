@@ -7,12 +7,12 @@ var app = app || {};
 
     el: '#app',
 
-    foodTemplate: _.template($('#item-template').html()),
-
     initialize: function(){
       this.$list = $('.search-result');
       this.listenTo(app.searchList, 'add', this.addSearchItem);
       this.listenTo(app.searchList, 'reset', this.clearSearchResult);
+
+      var selectedView = new app.SelectedView();
 
     },
 
@@ -69,16 +69,6 @@ var app = app || {};
     clearSearchResult: function(){
       this.$list.html('');
     }
-
-    // displayOne: function(food){
-    //   this.$list.append(this.foodTemplate(food.toJSON()));
-    // },
-    //
-    // render: function(){
-    //   this.$list.html('');
-    //   app.searchList.each(this.displayOne, this);
-    //
-    // }
 
   }); // app ends
 

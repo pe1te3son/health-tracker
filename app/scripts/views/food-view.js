@@ -7,7 +7,8 @@ var app = app || {};
     foodTemplate: _.template($('#item-template').html()),
 
     events: {
-      "click .add-btn": "addToFoodList"
+      "click .add-btn": "addToFoodList",
+      "click .remove-btn": "removeFromFoodList"
     },
 
     render: function() {
@@ -16,8 +17,32 @@ var app = app || {};
     },
 
     addToFoodList: function(){
-      console.log(this.model.attributes.name);
-      app.foodList.create(this.model.attributes);
+
+        var name = this.model.attributes.name;
+        var calories =  this.model.attributes.calories;
+
+        if(typeof app.foodList.findWhere({name: name, calories: calories}) === 'undefined' ){
+          app.foodList.create({
+            name: name,
+            calories: calories,
+            onList: true
+          });
+        }
+
+    },
+
+    removeFromFoodList: function(){
+      var self = this.model;
+      self.destroy({
+        wait: true,
+        success: function(model, response) {
+          console.log(' deleted');
+        },
+
+        error: function(model, response){
+          console.log('failed to remove');
+        }
+      });
     }
 
   });
