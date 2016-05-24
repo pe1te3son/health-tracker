@@ -28,7 +28,8 @@
 
       <div class="row" id="app">
 
-        <form class="col-sm-6 form-inline">
+      <div class="col-sm-6">
+        <form class="col-xs-12 form-inline search-form">
           <div class="form-group">
             <label class="sr-only" for="search-food">Search</label>
             <input type="email" class="form-control" id="search-food" placeholder="Search">
@@ -36,19 +37,41 @@
           <button type="submit" class="btn btn-primary search-button">Go</button>
         </form>
 
-        <div class="col-sm-6">
+        <div class="col-xs-12">
           <ul class="search-result">
 
           </ul>
         </div>
+      </div>
+
+      <div class="col-sm-6" id="daily-result-cont">
+        <div class="daily-graph">
+
+        </div>
+
+        <div class="daily-results">
+
+        </div>
+
+      </div>
 
       </div><!-- row ends -->
     </div><!-- wrapper / container -->
 
     <script type="text/template" id="item-template">
       <li class="food-item">
-        <strong><%= name %></strong>
-        <p><%= calories %></p>
+
+        <div class="item-content">
+          <strong><%= name %></strong>
+          <p><em>Calories: </em><%= calories %></p>
+        </div>
+        <div class="item-controls text-right">
+          <% if(onList){ %>
+            <button class="btn btn-default plus-btn"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+          <% } else { %>
+            <button id="add-item" class="btn btn-default plus-btn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+          <% } %>
+        </div>
       </li>
     </script>
 

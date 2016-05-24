@@ -16,7 +16,8 @@ var app = app || {};
 
     events: {
       "click .search-button": "searchQuery",
-      "keypress #search-food": "searchQuery"
+      "keypress #search-food": "searchQuery",
+
     },
 
     searchQuery: function(e){
