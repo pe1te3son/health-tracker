@@ -16,8 +16,8 @@ var app = app || {};
     },
 
     addToFoodList: function(){
-      console.log(this);
-      // use create to add to database
+      console.log(this.model.attributes.name);
+      app.foodList.create(this.model.attributes);
     }
 
   });
