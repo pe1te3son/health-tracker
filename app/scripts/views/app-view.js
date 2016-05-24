@@ -11,6 +11,8 @@ var app = app || {};
 
     initialize: function(){
       this.$list = $('.search-result');
+      this.listenTo(app.searchList, 'add', this.addSearchItem);
+      this.listenTo(app.searchList, 'reset', this.clearSearchResult);
 
     },
 
@@ -43,11 +45,11 @@ var app = app || {};
             // Create new food model
             var name = item.fields.brand_name + ", " + item.fields.item_name;
             var calories = item.fields.nf_calories
-
             app.searchList.add(new app.Food({name: name, calories: calories}));
+
           });
 
-          self.render();
+        //  self.render();
         })
         .fail(function(){
           console.log('fail');
@@ -57,15 +59,26 @@ var app = app || {};
 
     }, //searchQuery ends
 
-    displayOne: function(food){
-      this.$list.append(this.foodTemplate(food.toJSON()));
+    addSearchItem: function(item){
+
+      var foodview = new app.FoodView({ model: item });
+      this.$list.append(foodview.render().el);
+
     },
 
-    render: function(){
+    clearSearchResult: function(){
       this.$list.html('');
-      app.searchList.each(this.displayOne, this);
-
     }
+
+    // displayOne: function(food){
+    //   this.$list.append(this.foodTemplate(food.toJSON()));
+    // },
+    //
+    // render: function(){
+    //   this.$list.html('');
+    //   app.searchList.each(this.displayOne, this);
+    //
+    // }
 
   }); // app ends
 

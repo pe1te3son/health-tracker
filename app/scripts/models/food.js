@@ -10,7 +10,6 @@ var app = app || {};
       onList: false
     }
 
-  
   });
 
 })();
