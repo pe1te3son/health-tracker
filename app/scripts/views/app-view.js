@@ -13,7 +13,6 @@ var app = app || {};
       this.listenTo(app.searchList, 'reset', this.clearSearchResult);
 
       var selectedView = new app.SelectedView();
-
     },
 
     events: {
@@ -23,7 +22,6 @@ var app = app || {};
     },
 
     searchQuery: function(e){
-      var self = this;
 
       if(e.keyCode === 13 || e.type === "click"){
         // Stops form from submiting
@@ -49,7 +47,6 @@ var app = app || {};
 
           });
 
-        //  self.render();
         })
         .fail(function(){
           console.log('fail');

@@ -1,6 +1,7 @@
 var app = app || {};
 
 (function($){
+  'use strict';
   app.SelectedView = Backbone.View.extend({
 
     el: '#daily-result-cont',
