@@ -42,7 +42,9 @@
         <div class="row">
 
           <div class="col-md-6 search-results">
+            <ul id="search-results-list">
 
+            </ul>
           </div><!-- search-results ends -->
 
           <div class="col-md-6 saved-results">
@@ -54,6 +56,11 @@
       </div><!-- app ends -->
 
     </div><!-- wrapper/container ends -->
+
+    <script type="text/template" id="food-single-template">
+      <p><%= name %></p>
+      <p><%= calories %></p>
+    </script>
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
@@ -85,6 +92,8 @@
 
     <!-- build:js scripts/main.js -->
     <script src="scripts/models/food-single.js"></script>
+    <script src="scripts/collections/search-results-col.js"></script>
+    <script src="scripts/views/food-single-view.js"></script>
     <script src="scripts/views/search-results-view.js"></script>
     <script src="scripts/views/app-view.js"></script>
     <script src="scripts/app.js"></script>
