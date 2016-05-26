@@ -2,7 +2,7 @@ var app = app || {};
 
 (function(){
   app.FoodSingleView = Backbone.View.extend({
-    tagName: 'li',
+    tagName: 'tr',
 
     foodTemplate: _.template($('#food-single-template').html()),
 

@@ -41,10 +41,20 @@
 
         <div class="row">
 
-          <div class="col-md-6 search-results">
-            <ul id="search-results-list">
+          <div class="col-md-6 search-results-cont table-responsive">
 
-            </ul>
+            <table id="search-results" class="table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Food</th>
+                  <th class="text-center">Calories</th>
+                </tr>
+              </thead>
+              <tbody id="search-results-data">
+                
+              </tbody>
+            </table>
           </div><!-- search-results ends -->
 
           <div class="col-md-6 saved-results">
@@ -58,8 +68,9 @@
     </div><!-- wrapper/container ends -->
 
     <script type="text/template" id="food-single-template">
-      <p><%= name %></p>
-      <p><%= calories %></p>
+      <td class="search-results-icon search-data text-center"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></td>
+      <td class="search-data search-data-name"><%= name %></td>
+      <td class="search-data text-center"><%= calories %></td>
     </script>
 
     <!-- build:js scripts/vendor.js -->

@@ -4,19 +4,20 @@ var app = app || {};
   'use strict';
 
   app.SearchResultView = Backbone.View.extend({
-    el: '#search-results-list',
+    el: '#search-results',
 
     initialize: function(){
       this.listenTo(app.searchResultsCol, 'update', this.render );
+      this.$tbody = $('#search-results-data');
     },
 
     render: function(){
 
-      this.$el.html('');
+      this.$tbody.html('');
       app.searchResultsCol.each(function(model){
 
         var foodView = new app.FoodSingleView({model: model});
-        this.$el.append(foodView.render().el);
+        this.$tbody.append(foodView.render().el);
       }.bind(this));
 
     //  return this;
