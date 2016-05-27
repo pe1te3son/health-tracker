@@ -52,14 +52,21 @@
                 </tr>
               </thead>
               <tbody id="search-results-data">
-                
+
               </tbody>
             </table>
           </div><!-- search-results ends -->
 
-          <div class="col-md-6 saved-results">
+          <div class="col-md-6" id="selected-food-cont">
+            <div id="calories-sum">
 
-          </div><!-- saved-results ends -->
+            </div>
+
+            <div id="selected-food">
+
+            </div>
+
+          </div><!-- selected-food-cont ends -->
 
         </div><!-- row ends -->
 
@@ -68,7 +75,11 @@
     </div><!-- wrapper/container ends -->
 
     <script type="text/template" id="food-single-template">
-      <td class="search-results-icon search-data text-center"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></td>
+      <% if (saved) { %>
+        <td class="search-results-icon search-data text-center remove-btn"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></td>
+      <% } else { %>
+        <td class="search-results-icon search-data text-center add-btn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></td>
+      <% } %>
       <td class="search-data search-data-name"><%= name %></td>
       <td class="search-data text-center"><%= calories %></td>
     </script>
@@ -104,8 +115,10 @@
     <!-- build:js scripts/main.js -->
     <script src="scripts/models/food-single.js"></script>
     <script src="scripts/collections/search-results-col.js"></script>
+    <script src="scripts/collections/selected-food-col.js"></script>
     <script src="scripts/views/food-single-view.js"></script>
     <script src="scripts/views/search-results-view.js"></script>
+    <script src="scripts/views/selected-view.js"></script>
     <script src="scripts/views/app-view.js"></script>
     <script src="scripts/app.js"></script>
     <!-- endbuild -->

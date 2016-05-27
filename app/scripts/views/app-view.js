@@ -13,6 +13,7 @@ var app = app || {};
     initialize: function(){
       this.$list = $('search-result-list');
       this.searchResultView = new app.SearchResultView();
+      this.selectedView = new app.SelectedView();
     },
 
     getData: function(e){
@@ -43,7 +44,7 @@ var app = app || {};
         });
 
       }
-    }//getData ends
+    },//getData ends
 
   });
 
