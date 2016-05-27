@@ -19,10 +19,10 @@ var app = app || {};
     },
 
     addToDatabase: function(){
-      var d = new Date();
-      var strDate = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
-      var model = this.model.set({date: strDate, saved: true});
+
+      var model = this.model.set({date: this.getTimeStampForMe(), saved: true});
       app.selectedfoodCol.create(model.toJSON());
+      console.log(model);
     },
 
     removeFromDatabase: function(){
@@ -30,7 +30,6 @@ var app = app || {};
       self.destroy({
         wait: true,
         success: function(model){
-          //console.log('deleted');
           console.log(model.cid + " removed");
         },
         error: function(){

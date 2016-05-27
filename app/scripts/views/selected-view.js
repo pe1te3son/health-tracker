@@ -14,14 +14,13 @@ var app = app || {};
     },
 
     render: function(){
-      console.log('i ran');
-        this.$selectedFood.html('');
-        app.selectedfoodCol.each(function(model){
+      this.$selectedFood.html('');
+      app.selectedfoodCol.each(function(model){
 
-          var foodView = new app.FoodSingleView({model: model});
-          this.$selectedFood.append(foodView.render().el);
-          
-        }.bind(this));
+        var foodView = new app.FoodSingleView({model: model});
+        this.$selectedFood.append(foodView.render().el);
+
+      }.bind(this));
 
     }
 
