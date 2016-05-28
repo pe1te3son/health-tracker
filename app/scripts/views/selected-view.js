@@ -6,21 +6,34 @@ var app = app || {};
   app.SelectedView = Backbone.View.extend({
 
     el: '#selected-food-cont',
+    colection: app.selectedfoodCol,
+
+    events: {
+      'click #date-btn': 'retrieveData'
+    },
 
     initialize: function(){
       this.$caloriesSum = $('#calories-sum');
       this.$selectedFood = $('#selected-food');
-      this.listenTo(app.selectedfoodCol, 'update', this.render)
+      this.listenTo(this.colection, 'add', this.addOne);
+      this.listenTo(this.colection, 'remove', this.render);
+      this.date = "2016-5-28";
+
     },
 
     render: function(){
+
       this.$selectedFood.html('');
-      app.selectedfoodCol.each(function(model){
+      this.colection.each(this.addOne, this);
 
-        var foodView = new app.FoodSingleView({model: model});
-        this.$selectedFood.append(foodView.render().el);
+    },
 
-      }.bind(this));
+    addOne: function(food){
+      var foodView = new app.FoodSingleView({model: food});
+      this.$selectedFood.append(foodView.render().el);
+    },
+
+    retrieveData: function(){
 
     }
 
