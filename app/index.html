@@ -25,65 +25,40 @@
     <![endif]-->
     <div class="wrapper container">
 
-      <div id="app">
+      <div id="app" class="row">
 
-        <div class="row">
+        <div class="col-md-6" id="search-view">
 
-            <form class="form-inline col-xs-12" id="search-form">
+            <form class="" id="search-form">
               <div class="form-group">
-                <label for="search-input"></label>
+                <label class="sr-only" for="search-input">Search input</label>
                 <input type="text" class="form-control" id="search-input" placeholder="Search">
               </div>
-              <button type="submit" class="btn btn-primary" id="search-btn">Go</button>
 
             </form>
 
-        </div><!-- row ends -->
+            <ul id="search-result-list">
 
-        <div class="row">
+            </ul>
 
-          <div class="col-md-6 search-results-cont table-responsive">
+        </div><!-- search-view ends -->
 
-            <table id="search-results" class="table">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Food</th>
-                  <th class="text-center">Calories</th>
-                </tr>
-              </thead>
-              <tbody id="search-results-data">
 
-              </tbody>
-            </table>
-          </div><!-- search-results ends -->
 
-          <div class="col-md-6" id="selected-food-cont">
-              <button type="button" class="btn btn-primary" id="date-btn">date</button>
-            <div id="calories-sum">
 
-            </div>
 
-            <div id="selected-food">
-
-            </div>
-
-          </div><!-- selected-food-cont ends -->
-
-        </div><!-- row ends -->
-
-      </div><!-- app ends -->
+      </div><!-- row/app ends -->
 
     </div><!-- wrapper/container ends -->
 
     <script type="text/template" id="food-single-template">
+      <span class="food-item brand-name"><%= brandName %></span>
+      <span class="food-item name"><%= name %></span>
+      <span class="food-item calories"><%= calories %></span>
       <% if (saved) { %>
-        <td class="search-results-icon search-data text-center remove-btn"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></td>
-      <% } else { %>
-        <td class="search-results-icon search-data text-center add-btn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></td>
+        <span class="glyphicon glyphicon-remove-sign food-item remove-btn" aria-hidden="true"></span>
       <% } %>
-      <td class="search-data search-data-name"><%= name %></td>
-      <td class="search-data text-center"><%= calories %></td>
+
     </script>
 
     <!-- build:js scripts/vendor.js -->
@@ -115,12 +90,10 @@
      <script src="https://cdn.firebase.com/libs/backbonefire/0.5.1/backbonefire.min.js"></script>
 
     <!-- build:js scripts/main.js -->
-    <script src="scripts/models/food-single.js"></script>
-    <script src="scripts/collections/search-results-col.js"></script>
-    <script src="scripts/collections/selected-food-col.js"></script>
+    <script src="scripts/models/food-single-model.js"></script>
+    <script src="scripts/collections/search-list-col.js"></script>
     <script src="scripts/views/food-single-view.js"></script>
-    <script src="scripts/views/search-results-view.js"></script>
-    <script src="scripts/views/selected-view.js"></script>
+    <script src="scripts/views/search-view.js"></script>
     <script src="scripts/views/app-view.js"></script>
     <script src="scripts/app.js"></script>
     <!-- endbuild -->
