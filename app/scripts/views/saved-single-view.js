@@ -1,10 +1,12 @@
 var app = app || {};
 
 (function($){
-  app.FoodSingleView = Backbone.View.extend({
+  'use strict';
+  
+  app.SavedSingleView = Backbone.View.extend({
     tagName: 'li',
 
-    singleFoodTemplate: _.template($('#food-single-template').html()),
+    singleFoodTemplate: _.template($('#saved-single-template').html()),
 
     events: {
       'click': 'foodClicked'
@@ -18,9 +20,9 @@ var app = app || {};
     },
 
     foodClicked: function(){
-      //this.parent.foodClicked(this.model);
-      console.log(this.parent);
-    }
+      this.model.destroy();
+    },
+
 
   });
 })(jQuery);

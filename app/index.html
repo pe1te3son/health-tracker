@@ -34,7 +34,7 @@
                 <label class="sr-only" for="search-input">Search input</label>
                 <input type="text" class="form-control" id="search-input" placeholder="Search">
               </div>
-
+              <button type="button" class="btn btn-primary" id="data-btn">Click</button>
             </form>
 
             <ul id="search-result-list">
@@ -43,21 +43,31 @@
 
         </div><!-- search-view ends -->
 
+        <div class="col-md-6" id="saved-food-view">
 
+          <ul id="saved-food-list">
 
+          </ul>
 
+        </div>
 
       </div><!-- row/app ends -->
 
     </div><!-- wrapper/container ends -->
 
-    <script type="text/template" id="food-single-template">
+    <script type="text/template" id="saved-single-template">
       <span class="food-item brand-name"><%= brandName %></span>
       <span class="food-item name"><%= name %></span>
       <span class="food-item calories"><%= calories %></span>
-      <% if (saved) { %>
-        <span class="glyphicon glyphicon-remove-sign food-item remove-btn" aria-hidden="true"></span>
-      <% } %>
+      <span class="glyphicon glyphicon-remove-sign food-item remove-btn" aria-hidden="true"></span>
+
+    </script>
+
+    <script type="text/template" id="search-single-template">
+      <span class="food-item brand-name"><%= brandName %></span>
+      <span class="food-item name"><%= name %></span>
+      <span class="food-item calories"><%= calories %></span>
+      <span class="glyphicon glyphicon-remove-sign food-item remove-btn" aria-hidden="true"></span>
 
     </script>
 
@@ -91,9 +101,14 @@
 
     <!-- build:js scripts/main.js -->
     <script src="scripts/models/food-single-model.js"></script>
+    <script src="scripts/models/daily-calories-model.js"></script>
     <script src="scripts/collections/search-list-col.js"></script>
-    <script src="scripts/views/food-single-view.js"></script>
+    <script src="scripts/collections/firebase-food-col.js"></script>
+    <script src="scripts/collections/graph-col.js"></script>
+    <script src="scripts/views/search-single-view.js"></script>
+    <script src="scripts/views/saved-single-view.js"></script>
     <script src="scripts/views/search-view.js"></script>
+    <script src="scripts/views/saved-view.js"></script>
     <script src="scripts/views/app-view.js"></script>
     <script src="scripts/app.js"></script>
     <!-- endbuild -->

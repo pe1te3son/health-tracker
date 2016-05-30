@@ -11,10 +11,12 @@ var app = app || {};
     },
 
     initialize: function(){
-      new app.SearchView();
+      app.searchView = new app.SearchView();
+      app.savedFoodView = new app.SavedFoodView();
     },
 
     
+
   });
 
 })(jQuery);

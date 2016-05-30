@@ -1,6 +1,8 @@
 var app = app || {};
 
 (function(){
+  'use strict';
+
   app.SearchListCol = Backbone.Collection.extend({
     model: app.FoodSingle,
 
@@ -28,7 +30,7 @@ var app = app || {};
         var search = new app.FoodSingle({
           brandName: response.hits[i].fields.brand_name,
           name: response.hits[i].fields.item_name,
-          calories: parseFloat(response.hits[i].fields.nf_calories)
+          calories: response.hits[i].fields.nf_calories
         });
         searchArray.push(search);
       }

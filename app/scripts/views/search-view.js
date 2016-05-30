@@ -1,6 +1,8 @@
 var app = app || {};
 
 (function($){
+  'use strict';
+  
   app.SearchView = Backbone.View.extend({
     el: '#search-view',
 
@@ -17,7 +19,11 @@ var app = app || {};
 
     searchData: function(){
       this.colection.setInputVal(this.$searchField.val());
-      this.colection.fetch();
+      this.colection.fetch({
+        error: function(){
+          console.log('NO CONECTION');
+        }
+      });
 
       console.log(this.colection);
     },
@@ -29,7 +35,7 @@ var app = app || {};
 
       this.colection.each(function(item){
 
-        var foodview = new app.FoodSingleView({model: item});
+        var foodview = new app.SearchSingleView({model: item});
         this.$list.append(foodview.render().el);
 
       }.bind(this));
