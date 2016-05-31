@@ -12,6 +12,7 @@ var app = app || {};
       this.listenTo(this.colection, 'remove', this.render);
       this.listenTo(this.colection, 'add', this.render);
 
+
     },
 
     render: function(){
