@@ -5,8 +5,8 @@ var app = app || {};
   
   app.FoodSingle = Backbone.Model.extend({
     defaults: {
-      brandName: "",
-      name: "",
+      brandName: '',
+      name: '',
       calories: 0,
       saved: false
     }

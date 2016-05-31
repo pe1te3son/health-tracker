@@ -1,8 +1,8 @@
 var app = app || {};
 
-(function(){
+(function($){
   'use strict';
-  
+
   app.SavedFoodView = Backbone.View.extend({
     el: '#saved-food-view',
 
@@ -31,4 +31,4 @@ var app = app || {};
     }
 
   });
-})();
+})(jQuery);

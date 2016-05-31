@@ -24,7 +24,6 @@
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <div class="wrapper container">
-
       <div id="app" class="row">
 
         <div class="col-md-6" id="search-view">
@@ -36,6 +35,10 @@
               </div>
               <button type="button" class="btn btn-primary" id="data-btn">Click</button>
             </form>
+
+            <div id="datepicker">
+
+            </div>
 
             <ul id="search-result-list">
 
@@ -95,9 +98,15 @@
     <!-- endbuild -->
 
     <!-- Firebase -->
-     <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
-     <!-- BackboneFire -->
-     <script src="https://cdn.firebase.com/libs/backbonefire/0.5.1/backbonefire.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+    <!-- BackboneFire -->
+    <script src="https://cdn.firebase.com/libs/backbonefire/0.5.1/backbonefire.min.js"></script>
+
+    <!-- build:js plugins/datepicker.js -->
+    <script src="plugins/moment.js"></script>
+    <script src="plugins/pikaday.jquery.js"></script>
+    <script src="plugins/pikaday.js"></script>
+    <!-- endbuild -->
 
     <!-- build:js scripts/main.js -->
     <script src="scripts/models/food-single-model.js"></script>
