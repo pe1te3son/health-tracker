@@ -5,8 +5,7 @@ var app = app || {};
 
   app.DailyCalories = Backbone.Model.extend({
     defaults: {
-      date: '',
-      caloriesCurrentDay: 0
+      calories: 0
     }
   });
 })();

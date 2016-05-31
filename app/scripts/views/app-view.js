@@ -8,8 +8,10 @@ var app = app || {};
     el: '#app',
 
     initialize: function(){
+      var date = app.helpers.getDateStamp();
       app.searchView = new app.SearchView();
-      app.savedFoodView = new app.SavedFoodView();
+      app.savedFoodView = new app.SavedFoodView(date);
+      app.graphCol = new app.GraphCol();
       app.picker = new Pikaday(
     {
         field: document.getElementById('datepicker-input'),

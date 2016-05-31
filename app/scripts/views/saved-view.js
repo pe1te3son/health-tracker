@@ -6,29 +6,43 @@ var app = app || {};
   app.SavedFoodView = Backbone.View.extend({
     el: '#saved-food-view',
 
-    initialize: function(){
+    initialize: function(dateToday){
       this.colection = new app.FirebaseFoodCol();
       this.$list = $('#saved-food-list');
+      this.$caloriesContainer = $('#all-calories');
       this.listenTo(this.colection, 'remove', this.render);
       this.listenTo(this.colection, 'add', this.render);
-
+      this.date = dateToday;
 
     },
 
     render: function(){
-      this.$list.html('');
-
-      this.colection.each(function(item){
+      var self = this;
+      self.$list.html('');
+      self.colection.each(function(item){
 
         var foodview = new app.SavedSingleView({model: item});
-        this.$list.append(foodview.render().el);
+        self.$list.append(foodview.render().el);
 
-      }.bind(this));
+      }.bind(self));
+
+      // Counts and updates calories each time data are upated and saves them
+      this.displayCaloriesSum();
     },
 
     addOne: function(food){
-      food.model.set({saved: true});
       this.colection.create(food.model.toJSON());
+    },
+
+    displayCaloriesSum: function(){
+      var caloriesSum = this.colection.countAll();
+      this.$caloriesContainer.html('');
+      this.$caloriesContainer.html(caloriesSum);
+      this.sendToGraph(caloriesSum);
+    },
+
+    sendToGraph: function(caloriesToday){
+      app.graphCol.create({id: this.date, calories: caloriesToday});
     }
 
   });
