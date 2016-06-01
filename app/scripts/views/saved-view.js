@@ -38,7 +38,11 @@ var app = app || {};
       var caloriesSum = this.colection.countAll();
       this.$caloriesContainer.html('');
       this.$caloriesContainer.html(caloriesSum);
-      this.sendToGraph(caloriesSum);
+      
+      if(caloriesSum > 0){
+        this.sendToGraph(caloriesSum);
+      }
+
     },
 
     sendToGraph: function(caloriesToday){

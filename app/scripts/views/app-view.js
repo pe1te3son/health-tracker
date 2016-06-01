@@ -8,7 +8,6 @@ var app = app || {};
     el: '#app',
 
     initialize: function(){
-      var date = app.helpers.getDateStamp();
       app.currentDay = moment().format('DD-MM-YYYY');
       app.searchView = new app.SearchView();
       app.graphCol = new app.GraphCol();
@@ -17,8 +16,8 @@ var app = app || {};
         field: document.getElementById('datepicker-input'),
         firstDay: 1,
         minDate: new Date(2000, 0, 1),
-        maxDate: new Date(2020, 12, 31),
-        yearRange: [2000, 2020],
+        maxDate: new Date(moment().year(), moment().month(), moment().format('D')),
+        yearRange: 5,
         bound: false,
         onSelect: function() {
           app.currentDay = this.getMoment().format('DD-MM-YYYY');
@@ -28,6 +27,7 @@ var app = app || {};
         container: document.getElementById('datepicker-container'),
     });
     app.savedFoodView = new app.SavedFoodView(app.currentDay);
+
     }
 
   });
