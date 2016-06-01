@@ -11,6 +11,7 @@
 
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/pikaday/css/pikaday.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -35,7 +36,8 @@
             </form>
 
             <div id="datepicker">
-              <input type="text" id="datepicker-input">
+              <label class="sr-only" for="datepicker-input">enter date format: dd-mm-yyyy</label>
+              <input type="text" id="datepicker-input" style="display: none">
               <div id="datepicker-container">
 
               </div>
@@ -82,6 +84,8 @@
     <script src="/bower_components/jquery/dist/jquery.js"></script>
     <script src="/bower_components/underscore/underscore.js"></script>
     <script src="/bower_components/backbone/backbone.js"></script>
+    <script src="/bower_components/moment/moment.js"></script>
+    <script src="/bower_components/pikaday/pikaday.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -104,12 +108,6 @@
     <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
     <!-- BackboneFire -->
     <script src="https://cdn.firebase.com/libs/backbonefire/0.5.1/backbonefire.min.js"></script>
-
-    <!-- build:js plugins/datepicker.js -->
-    <script src="plugins/moment.js"></script>
-    <script src="plugins/pikaday.jquery.js"></script>
-    <script src="plugins/pikaday.js"></script>
-    <!-- endbuild -->
 
     <!-- build:js scripts/main.js -->
     <script src="scripts/models/food-single-model.js"></script>

@@ -7,7 +7,7 @@ var app = app || {};
     model: app.FoodSingle,
     url: function(){
       var url = 'https://health-tracker-janak.firebaseio.com/selectedfood/';
-      var date = app.helpers.getDateStamp();
+      var date = app.currentDay;
       return url + date;
     },
 

@@ -9,8 +9,8 @@ var app = app || {};
 
     initialize: function(){
       var date = app.helpers.getDateStamp();
+      app.currentDay = moment().format('DD-MM-YYYY');
       app.searchView = new app.SearchView();
-      app.savedFoodView = new app.SavedFoodView(date);
       app.graphCol = new app.GraphCol();
       app.picker = new Pikaday(
     {
@@ -20,8 +20,14 @@ var app = app || {};
         maxDate: new Date(2020, 12, 31),
         yearRange: [2000, 2020],
         bound: false,
+        onSelect: function() {
+          app.currentDay = this.getMoment().format('DD-MM-YYYY');
+          app.savedFoodView.initialize(app.currentDay);
+          app.savedFoodView.render();
+        },
         container: document.getElementById('datepicker-container'),
     });
+    app.savedFoodView = new app.SavedFoodView(app.currentDay);
     }
 
   });
