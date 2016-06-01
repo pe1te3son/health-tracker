@@ -4,8 +4,7 @@ var ENTER_KEY = 13;
 
 $(function(){
   'use strict'
-  
+
   // Create an App
   new app.AppView();
-
 });

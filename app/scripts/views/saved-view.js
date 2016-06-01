@@ -32,13 +32,14 @@ var app = app || {};
 
     addOne: function(food){
       this.colection.create(food.model.toJSON());
+      console.log(food.model.toJSON());
     },
 
     displayCaloriesSum: function(){
       var caloriesSum = this.colection.countAll();
       this.$caloriesContainer.html('');
       this.$caloriesContainer.html(caloriesSum);
-      
+
       if(caloriesSum > 0){
         this.sendToGraph(caloriesSum);
       }
@@ -46,7 +47,7 @@ var app = app || {};
     },
 
     sendToGraph: function(caloriesToday){
-      app.graphCol.create({id: this.date, calories: caloriesToday});
+      app.graphCol.create({id: 'caloriesToday', calories: caloriesToday});
     }
 
   });

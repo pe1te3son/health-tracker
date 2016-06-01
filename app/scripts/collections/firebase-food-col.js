@@ -6,9 +6,11 @@ var app = app || {};
   app.FirebaseFoodCol = Backbone.Firebase.Collection.extend({
     model: app.FoodSingle,
     url: function(){
-      var url = 'https://health-tracker-janak.firebaseio.com/selectedfood/';
-      var date = app.currentDay;
-      return url + date;
+      var url = 'https://health-tracker-janak.firebaseio.com/';
+      var year = app.currentDate.year;
+      var month = app.currentDate.month;
+      var day = app.currentDate.day;
+      return url + '/ '+ year + '/ '+ month + '/ '+ day + '/food';
     },
 
     countAll: function(){

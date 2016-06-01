@@ -25,39 +25,46 @@
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <div class="wrapper container">
-      <div id="app" class="row">
-        <div class="col-md-6" id="search-view">
+      <div  id="app" >
+        <div class="row">
+          <div class="col-md-6" id="search-view">
 
-            <form class="" id="search-form">
-              <div class="form-group">
-                <label class="sr-only" for="search-input">Search input</label>
-                <input type="text" class="form-control" id="search-input" placeholder="Search">
+              <form class="" id="search-form">
+                <div class="form-group">
+                  <label class="sr-only" for="search-input">Search input</label>
+                  <input type="text" class="form-control" id="search-input" placeholder="Search">
+                </div>
+              </form>
+
+              <ul id="search-result-list"></ul>
+
+              <div id="datepicker">
+
+                <label class="sr-only" for="datepicker-input">enter date: dd-mm-yyyy</label>
+                <input type="text" id="datepicker-input" style="display: none">
+                <div id="datepicker-container"></div>
+
               </div>
-            </form>
 
-            <ul id="search-result-list"></ul>
+          </div><!-- search-view ends -->
 
-            <div id="datepicker">
-
-              <label class="sr-only" for="datepicker-input">enter date: dd-mm-yyyy</label>
-              <input type="text" id="datepicker-input" style="display: none">
-              <div id="datepicker-container"></div>
-
+          <div class="col-md-6" id="saved-food-view">
+            <div class="all-calories-cont">
+              <p id="all-calories"></p>
             </div>
+            <ul id="saved-food-list">
 
-        </div><!-- search-view ends -->
+            </ul>
 
-        <div class="col-md-6" id="saved-food-view">
-          <div class="all-calories-cont">
-            <p id="all-calories"></p>
-          </div>
-          <ul id="saved-food-list">
+          </div><!-- saved-food-view ends -->
 
-          </ul>
+        </div><!-- row/app ends -->
 
+        <div class="row">
+          <div id="chartdiv" style="height:400px;width:500px; "></div>
         </div>
 
-      </div><!-- row/app ends -->
+      </div><!-- app ends -->
 
     </div><!-- wrapper/container ends -->
 
@@ -87,6 +94,10 @@
     <!-- endbower -->
     <!-- endbuild -->
 
+    <!--[if lt IE 9]>
+      <script language="javascript" type="text/javascript" src="plugins/excanvas.js"></script>
+    <![endif]-->
+
     <!-- build:js scripts/plugins.js -->
     <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/affix.js"></script>
     <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/alert.js"></script>
@@ -100,6 +111,9 @@
     <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js"></script>
     <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>
     <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tab.js"></script>
+    <script src="plugins/jquery.jqplot.js"></script>
+    <script src="plugins/jqplot.canvasTextRenderer.js"></script>
+    <script src="plugins/jqplot.canvasAxisLabelRenderer.js"></script>
     <!-- endbuild -->
 
     <!-- Firebase -->
