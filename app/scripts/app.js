@@ -8,7 +8,7 @@ $(function(){
   app.helpers = {
     getDateStamp: function(){
       var d = new Date();
-      var strDate = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
+      var strDate = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
       return strDate;
     }
   }
