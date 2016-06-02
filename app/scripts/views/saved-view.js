@@ -6,20 +6,19 @@ var app = app || {};
   app.SavedFoodView = Backbone.View.extend({
     el: '#saved-food-view',
 
-    initialize: function(dateToday){
-      this.colection = new app.FirebaseFoodCol();
+    initialize: function(){
+      this.collection = new app.FirebaseFoodCol();
       this.$list = $('#saved-food-list');
       this.$caloriesContainer = $('#all-calories');
-      this.listenTo(this.colection, 'remove', this.render);
-      this.listenTo(this.colection, 'add', this.render);
-      this.date = dateToday;
+      this.listenTo(this.collection, 'remove', this.render);
+      this.listenTo(this.collection, 'add', this.render);
 
     },
 
     render: function(){
       var self = this;
       self.$list.html('');
-      self.colection.each(function(item){
+      self.collection.each(function(item){
 
         var foodview = new app.SavedSingleView({model: item});
         self.$list.append(foodview.render().el);
@@ -31,12 +30,11 @@ var app = app || {};
     },
 
     addOne: function(food){
-      this.colection.create(food.model.toJSON());
-      console.log(food.model.toJSON());
+      this.collection.create(food.model.toJSON());
     },
 
     displayCaloriesSum: function(){
-      var caloriesSum = this.colection.countAll();
+      var caloriesSum = this.collection.countAll();
       this.$caloriesContainer.html('');
       this.$caloriesContainer.html(caloriesSum);
 
@@ -47,7 +45,8 @@ var app = app || {};
     },
 
     sendToGraph: function(caloriesToday){
-      app.graphCol.create({id: 'caloriesToday', calories: caloriesToday});
+      this.graphCollection = new app.GraphCol();
+      this.graphCollection.create({id: 'caloriesToday', calories: caloriesToday});
     }
 
   });

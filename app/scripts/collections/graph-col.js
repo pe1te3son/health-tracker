@@ -10,7 +10,7 @@ var app = app || {};
       var year = app.currentDate.year;
       var month = app.currentDate.month;
       var day = app.currentDate.day;
-      return url + '/ '+ year + '/ '+ month + '/ ' + day;
+      return url + year + '/'+ month + '/' + day;
     }
   });
 })();

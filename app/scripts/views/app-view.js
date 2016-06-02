@@ -17,7 +17,6 @@ var app = app || {};
       console.log(app.currentDate);
 
       app.searchView = new app.SearchView();
-      app.graphCol = new app.GraphCol();
       app.picker = new Pikaday(
         {
             field: document.getElementById('datepicker-input'),
@@ -27,8 +26,10 @@ var app = app || {};
             yearRange: 5,
             bound: false,
             onSelect: function() {
-              app.currentDay = this.getMoment().format('DD-MM-YYYY');
-              app.savedFoodView.initialize(app.currentDay);
+              app.currentDate.year = this.getMoment().format('YYYY');
+              app.currentDate.month = this.getMoment().format('MMMM');
+              app.currentDate.day =  this.getMoment().format('DD');
+              app.savedFoodView.initialize();
               app.savedFoodView.render();
             },
             container: document.getElementById('datepicker-container'),
