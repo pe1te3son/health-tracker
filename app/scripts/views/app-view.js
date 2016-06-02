@@ -7,16 +7,22 @@ var app = app || {};
 
     el: '#app',
 
+    events: {
+      'click .pika-day': 'render'
+    },
+
     initialize: function(){
+
       app.currentDate = {
         year: moment().format('YYYY'),
         month: moment().format('MMMM'),
         day: moment().format('DD')
       };
-
-      console.log(app.currentDate);
-
+      // Initializes the View to display search results
       app.searchView = new app.SearchView();
+
+      // Datepicker
+      // Each time date is selected, it renders the View for approprieate day
       app.picker = new Pikaday(
         {
             field: document.getElementById('datepicker-input'),
@@ -34,9 +40,26 @@ var app = app || {};
             },
             container: document.getElementById('datepicker-container'),
         });
-      app.savedFoodView = new app.SavedFoodView();
 
-      $.jqplot('chartdiv',  [[[1, 2],[3,5.12],[5,13.1],[7,20],[9,85.9],[11,219.9]]],
+      // Initializes View which displays saved food
+      app.savedFoodView = new app.SavedFoodView();
+      this.render();
+
+    },// initialize ends
+
+    render: function(){
+      this.chartDisplay();
+    },
+
+    chartDisplay: function(){
+
+      $('#chartdiv').html('');
+      var data = [[1, 20],[3,50],[5,13.1],[7,7],[9,38],[11,219.9]];
+      
+      $.jqplot('chartdiv',
+        [
+          data
+        ],
         { title:'Calories this month',
           seriesDefaults: {
             rendererOptions: {
@@ -57,7 +80,6 @@ var app = app || {};
               }
           },
         });
-
     }
 
   });
