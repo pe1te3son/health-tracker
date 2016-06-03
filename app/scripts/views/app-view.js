@@ -75,11 +75,17 @@ var app = app || {};
       app.graphCol = new app.GraphCol();
       app.graphCol.fetch({
         success: function(){
-          for(var i=0; i<app.graphCol.models.length; i++){
-            var calPerDay = app.graphCol.models[i].toJSON().caloriesToday.calories;
-            var dayID = app.graphCol.models[i].toJSON().caloriesToday.day;
-            console.log(i+1);
-            self.dataForGraph.push([dayID ,calPerDay]);
+          for(var i=0; i<app.currentDate.daysThisMonth; i++){
+
+            if(app.graphCol.get(i)){
+              var calPerDay = app.graphCol.get(i).toJSON().caloriesToday.calories;
+              var dayID = app.graphCol.get(i).toJSON().caloriesToday.day;
+              self.dataForGraph.push([dayID ,calPerDay]);
+
+            }else{
+              self.dataForGraph.push([i+1 , 0]);
+            }
+
           }
 
           if(self.dataForGraph.length > 0){
@@ -88,6 +94,9 @@ var app = app || {};
             app.helpers.buildGraph([[1, 0]]);
           }
 
+        },// success ends
+        error: function(){
+          console.log('fetching failed');
         }
       });
 
