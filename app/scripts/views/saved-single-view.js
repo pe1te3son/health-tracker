@@ -2,7 +2,7 @@ var app = app || {};
 
 (function($){
   'use strict';
-  
+
   app.SavedSingleView = Backbone.View.extend({
     tagName: 'li',
 
@@ -20,6 +20,7 @@ var app = app || {};
     },
 
     foodClicked: function(){
+      console.log(this.model);
       this.model.destroy();
     },
 

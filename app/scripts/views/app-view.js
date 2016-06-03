@@ -18,7 +18,8 @@ var app = app || {};
       app.currentDate = {
         year: moment().format('YYYY'),
         month: moment().format('MMMM'),
-        day: moment().format('D')
+        day: moment().format('D'),
+        daysThisMonth: moment().daysInMonth()
       };
       // Initializes the View to display search results
       app.searchView = new app.SearchView();
@@ -38,8 +39,10 @@ var app = app || {};
               app.currentDate.year = this.getMoment().format('YYYY');
               app.currentDate.month = this.getMoment().format('MMMM');
               app.currentDate.day =  this.getMoment().format('D');
+              app.currentDate.daysThisMonth = this.getMoment().daysInMonth();
               app.savedFoodView.initialize();
               app.savedFoodView.render();
+              console.log(app.currentDate.daysThisMonth);
 
               if(monthBeforeSelect != this.getMoment().format('MMMM')){
                 self.showGraph();
@@ -72,16 +75,19 @@ var app = app || {};
       app.graphCol = new app.GraphCol();
       app.graphCol.fetch({
         success: function(){
-
-          app.graphCol.models.forEach(function(day){
-            var calPerDay = day.toJSON().caloriesToday.calories;
-            var dayID = day.toJSON().caloriesToday.day;
-
+          for(var i=0; i<app.graphCol.models.length; i++){
+            var calPerDay = app.graphCol.models[i].toJSON().caloriesToday.calories;
+            var dayID = app.graphCol.models[i].toJSON().caloriesToday.day;
+            console.log(i+1);
             self.dataForGraph.push([dayID ,calPerDay]);
+          }
 
-          });
+          if(self.dataForGraph.length > 0){
+            app.helpers.buildGraph(self.dataForGraph);
+          }else{
+            app.helpers.buildGraph([[1, 0]]);
+          }
 
-        app.helpers.buildGraph(self.dataForGraph);
         }
       });
 
