@@ -39,14 +39,14 @@ var app = app || {};
       this.$caloriesContainer.html(caloriesSum);
 
       if(caloriesSum > 0){
-        this.sendToGraph(caloriesSum);
+        this.saveDailyCalories(caloriesSum);
       }
 
     },
 
-    sendToGraph: function(caloriesToday){
-      this.graphCollection = new app.GraphCol();
-      this.graphCollection.create({id: 'caloriesToday', calories: caloriesToday});
+    saveDailyCalories: function(caloriesToday){
+      this.calSumCol = new app.CalSumCol();
+      this.calSumCol.create({id: 'caloriesToday', calories: caloriesToday});
     }
 
   });

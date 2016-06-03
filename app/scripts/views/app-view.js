@@ -55,7 +55,7 @@ var app = app || {};
 
       $('#chartdiv').html('');
       var data = [[1, 20],[3,50],[5,13.1],[7,7],[9,38],[11,219.9]];
-      
+
       $.jqplot('chartdiv',
         [
           data
