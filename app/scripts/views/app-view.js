@@ -1,7 +1,8 @@
 var app = app || {};
 
 (function($){
-  'use strict';
+
+    'use strict';
 
   app.AppView = Backbone.View.extend({
 
@@ -12,11 +13,12 @@ var app = app || {};
     },
 
     initialize: function(){
+      var self = this;
 
       app.currentDate = {
         year: moment().format('YYYY'),
         month: moment().format('MMMM'),
-        day: moment().format('DD')
+        day: moment().format('D')
       };
       // Initializes the View to display search results
       app.searchView = new app.SearchView();
@@ -32,55 +34,59 @@ var app = app || {};
             yearRange: 5,
             bound: false,
             onSelect: function() {
+              var monthBeforeSelect = app.currentDate.month;
               app.currentDate.year = this.getMoment().format('YYYY');
               app.currentDate.month = this.getMoment().format('MMMM');
-              app.currentDate.day =  this.getMoment().format('DD');
+              app.currentDate.day =  this.getMoment().format('D');
               app.savedFoodView.initialize();
               app.savedFoodView.render();
+
+              if(monthBeforeSelect != this.getMoment().format('MMMM')){
+                self.showGraph();
+              }
             },
             container: document.getElementById('datepicker-container'),
         });
 
       // Initializes View which displays saved food
       app.savedFoodView = new app.SavedFoodView();
-      this.render();
+
+      // Display graph
+      self.showGraph();
+
+      // Listens for window resize
+      // Rebuilds Graph without fetching data each time as data are saved when showGraph() has been called
+      $(window).on('resize', function(){
+         app.helpers.buildGraph(self.dataForGraph);
+      });
 
     },// initialize ends
 
-    render: function(){
-      this.chartDisplay();
-    },
+    showGraph: function(){
 
-    chartDisplay: function(){
+      // This function fetches data for Graph.
+      // It saves  data in this View so it can be reused on window resize.
 
-      $('#chartdiv').html('');
-      var data = [[1, 20],[3,50],[5,13.1],[7,7],[9,38],[11,219.9]];
+      var self = this;
+      self.dataForGraph = [];
+      app.graphCol = new app.GraphCol();
+      app.graphCol.fetch({
+        success: function(){
 
-      $.jqplot('chartdiv',
-        [
-          data
-        ],
-        { title:'Calories this month',
-          seriesDefaults: {
-            rendererOptions: {
-                smooth: true
-            }
-          },
-          series:[{color:'#5FAB78'}],
-          axes: {
-              xaxis: {
-                  min: 0,
-                  label: 'Days'
+          app.graphCol.models.forEach(function(day){
+            var calPerDay = day.toJSON().caloriesToday.calories;
+            var dayID = day.toJSON().caloriesToday.day;
 
-              },
-              yaxis: {
-                  min: 0,
-                  label: 'Calories',
-                  labelRenderer: $.jqplot.CanvasAxisLabelRenderer
-              }
-          },
-        });
-    }
+            self.dataForGraph.push([dayID ,calPerDay]);
+
+          });
+
+        app.helpers.buildGraph(self.dataForGraph);
+        }
+      });
+
+    }// showGraph ends
+
 
   });
 
