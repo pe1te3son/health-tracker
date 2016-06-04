@@ -17,9 +17,15 @@ $(function(){
         ],
         {
           title:'Calories this month',
+          // Turns on animatino for all series in this plot.
+          animate: true,
+          animateReplot: true,
           seriesDefaults: {
             rendererOptions: {
-              smooth: true,
+
+              animation: {
+                  speed: 4000
+              }
             },
             markerRenderer: $.jqplot.MarkerRenderer,
             markerOptions: {
@@ -28,16 +34,16 @@ $(function(){
           },
 
           series:[
-            { color:'#5FAB78' }
+            { color:'#5FAB78'},
+
           ],
 
           axes: {
             xaxis: {
-              min: 1,
-              max: app.currentDate.daysThisMonth,
-              ticks: self.setTicks(),
-              label: 'Days'
-
+              renderer:$.jqplot.DateAxisRenderer,
+              //tickRenderer: $.jqplot.AxisTickRenderer,
+              tickOptions:{formatString:'%b %#d'},
+              min: self.setFirstDay()
             },
             yaxis: {
               min: 0,
@@ -53,28 +59,11 @@ $(function(){
 
     },//buildGraph ends
 
-    setTicks: function(){
-      var ticks = [];
-      var remainder = app.currentDate.daysThisMonth % 2;
-
-      if(window.innerWidth > 780){
-
-        if(remainder === 0){
-          for(var i=2; i<=app.currentDate.daysThisMonth; i+=2){
-            ticks.push((i).toFixed(0));
-          }
-        }else{
-          for(var i=1; i<=app.currentDate.daysThisMonth; i+=2){
-            ticks.push((i).toFixed(0));
-          }
-        }
-
-      }else{
-        ticks = [(1).toFixed(0), (8).toFixed(0), (15).toFixed(0), (22).toFixed(0), app.currentDate.daysThisMonth.toFixed(0)];
-      }
-
-      return ticks;
+    setFirstDay: function(){
+      var startDay = app.currentDate.graphPrefix + '1';
+      return startDay;
     }
+
   };
 
   // Create an App

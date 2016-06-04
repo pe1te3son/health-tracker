@@ -16,6 +16,7 @@ var app = app || {};
       var self = this;
 
       app.currentDate = {
+        graphPrefix: moment().format('YYYY-M-'),
         year: moment().format('YYYY'),
         month: moment().format('MMMM'),
         day: moment().format('D'),
@@ -36,13 +37,13 @@ var app = app || {};
             bound: false,
             onSelect: function() {
               var monthBeforeSelect = app.currentDate.month;
+              app.currentDate.graphPrefix = this.getMoment().format('YYYY-M-'),
               app.currentDate.year = this.getMoment().format('YYYY');
               app.currentDate.month = this.getMoment().format('MMMM');
               app.currentDate.day =  this.getMoment().format('D');
               app.currentDate.daysThisMonth = this.getMoment().daysInMonth();
               app.savedFoodView.initialize();
               app.savedFoodView.render();
-              console.log(app.currentDate.daysThisMonth);
 
               if(monthBeforeSelect != this.getMoment().format('MMMM')){
                 self.showGraph();
@@ -75,24 +76,22 @@ var app = app || {};
       app.graphCol = new app.GraphCol();
       app.graphCol.fetch({
         success: function(){
-          for(var i=0; i<app.currentDate.daysThisMonth; i++){
+          for(var i=1; i<app.currentDate.daysThisMonth+1; i++){
 
             if(app.graphCol.get(i)){
               var calPerDay = app.graphCol.get(i).toJSON().caloriesToday.calories;
               var dayID = app.graphCol.get(i).toJSON().caloriesToday.day;
-              self.dataForGraph.push([dayID ,calPerDay]);
+              var dateFormated = app.currentDate.graphPrefix + dayID;
+              self.dataForGraph.push([dateFormated, calPerDay]);
 
             }else{
-              self.dataForGraph.push([i+1 , 0]);
+              self.dataForGraph.push([app.currentDate.graphPrefix + i , 0]);
             }
 
           }
 
-          if(self.dataForGraph.length > 0){
-            app.helpers.buildGraph(self.dataForGraph);
-          }else{
-            app.helpers.buildGraph([[1, 0]]);
-          }
+          // Build graph
+          app.helpers.buildGraph(self.dataForGraph);
 
         },// success ends
         error: function(){

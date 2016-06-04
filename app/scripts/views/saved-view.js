@@ -47,6 +47,7 @@ var app = app || {};
     saveDailyCalories: function(caloriesToday){
       this.calSumCol = new app.CalSumCol();
       this.calSumCol.create({id: 'caloriesToday', calories: caloriesToday, day: parseInt(app.currentDate.day)});
+
     }
 
   });
