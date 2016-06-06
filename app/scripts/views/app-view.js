@@ -36,7 +36,6 @@ var app = app || {};
             yearRange: 5,
             bound: false,
             onSelect: function() {
-              var monthBeforeSelect = app.currentDate.month;
               app.currentDate.graphPrefix = this.getMoment().format('YYYY-M-'),
               app.currentDate.year = this.getMoment().format('YYYY');
               app.currentDate.month = this.getMoment().format('MMMM');
@@ -45,9 +44,15 @@ var app = app || {};
               app.savedFoodView.initialize();
               app.savedFoodView.render();
 
-              if(monthBeforeSelect != this.getMoment().format('MMMM')){
+            },
+            onDraw: function(){
+              var monthBeforeSelect = app.currentDate.month;
+              app.currentDate.month = moment().month(this.calendars[0].month).format('MMMM');
+
+              if(monthBeforeSelect != app.currentDate.month){
                 self.showGraph();
               }
+
             },
             container: document.getElementById('datepicker-container'),
         });
@@ -79,7 +84,7 @@ var app = app || {};
           for(var i=1; i<app.currentDate.daysThisMonth+1; i++){
 
             if(app.graphCol.get(i)){
-              var calPerDay = app.graphCol.get(i).toJSON().caloriesToday.calories;
+              var calPerDay = parseInt(app.graphCol.get(i).toJSON().caloriesToday.calories);
               var dayID = app.graphCol.get(i).toJSON().caloriesToday.day;
               var dateFormated = app.currentDate.graphPrefix + dayID;
               self.dataForGraph.push([dateFormated, calPerDay]);
@@ -89,7 +94,7 @@ var app = app || {};
             }
 
           }
-
+          console.log(self.dataForGraph);
           // Build graph
           app.helpers.buildGraph(self.dataForGraph);
 

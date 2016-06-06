@@ -35,18 +35,19 @@ var app = app || {};
 
     displayCaloriesSum: function(){
       var caloriesSum = this.collection.countAll();
+      var calFormated = parseFloat(caloriesSum).toFixed(1)
       this.$caloriesContainer.html('');
-      this.$caloriesContainer.html(caloriesSum);
-
+      this.$caloriesContainer.html(calFormated);
+      
       if(caloriesSum > 0){
-        this.saveDailyCalories(caloriesSum);
+        this.saveDailyCalories(calFormated);
       }
 
     },
 
     saveDailyCalories: function(caloriesToday){
       this.calSumCol = new app.CalSumCol();
-      this.calSumCol.create({id: 'caloriesToday', calories: caloriesToday, day: parseInt(app.currentDate.day)});
+      this.calSumCol.create({id: 'caloriesToday', calories: caloriesToday, day: app.currentDate.day});
 
     }
 
