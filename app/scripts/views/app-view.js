@@ -8,15 +8,16 @@ var app = app || {};
 
     el: '#app',
 
+    loginFormTemplate: _.template($('#login-form-template').html()),
+
     events: {
       'click #testone': 'render',
-      'click #login': 'login',
-      'click #register': 'register'
+      'click #login': 'loginForm',
+      'click #register': 'registerForm'
     },
 
     initialize: function(){
       var self = this;
-
       app.currentDate = {
         graphPrefix: moment().format('YYYY-M-'),
         year: moment().format('YYYY'),
@@ -24,6 +25,8 @@ var app = app || {};
         day: moment().format('D'),
         daysThisMonth: moment().daysInMonth()
       };
+
+      app.firebaseUsers = new Firebase(app.firebaseUrl);
 
       // Initializes View which displays saved food
       app.savedFoodView = new app.SavedFoodView();
@@ -77,12 +80,54 @@ var app = app || {};
 
     },// initialize ends
 
-    login: function(){
+    loginForm: function(){
+      $('#form-cont').html('').append(this.loginFormTemplate(
+        {
+          login: true,
+          id: 'login'
+        }
+      ));
+
+      $('#login-form').on('submit', function(e){
+        e.preventDefault();
+
+        var loginEmail = $('#inputEmail').val();
+        var loginPassword = $('#inputPassword').val();
+        app.firebaseUsers.authWithPassword({
+          email    : loginEmail,
+          password : loginPassword
+        }, function (error, authData) {
+              if (error) {
+                  switch (error.code) {
+                      case 'INVALID_EMAIL':
+                          console.log('The specified user account email is invalid.');
+                          break;
+                      case 'INVALID_PASSWORD':
+                          console.log('The specified user account password is incorrect.');
+                          break;
+                      case 'INVALID_USER':
+                          console.log('The specified user account does not exist.');
+                          break;
+                      default:
+                          console.log('Error logging user in:', error);
+                  }
+              } else {
+                  console.log('loged in');
+              }
+          });
+      });
+
 
     },
 
-    register: function(){
-    
+    registerForm: function(){
+      $('#form-cont').html('').append(this.loginFormTemplate(
+        {
+          login: false,
+          id: 'register'
+        }
+      ));
+
     },
 
     showGraph: function(){
