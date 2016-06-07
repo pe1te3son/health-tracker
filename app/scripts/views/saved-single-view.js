@@ -1,3 +1,4 @@
+// Displays each food item saved in database
 var app = app || {};
 
 (function($){
@@ -20,7 +21,6 @@ var app = app || {};
     },
 
     foodClicked: function(){
-      console.log(this.model);
       this.model.destroy();
     },
 

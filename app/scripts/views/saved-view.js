@@ -1,3 +1,11 @@
+/**
+  Saved items View
+
+  Controls all food saved in database. Displays sum for everyday, adds and deletes
+  each food item when clicked on.
+*/
+
+
 var app = app || {};
 
 (function($){
@@ -33,18 +41,20 @@ var app = app || {};
       this.collection.create(food.model.toJSON());
     },
 
+    // Counts calories for each day
     displayCaloriesSum: function(){
       var caloriesSum = this.collection.countAll();
       var calFormated = parseFloat(caloriesSum).toFixed(1)
       this.$caloriesContainer.html('');
       this.$caloriesContainer.html(calFormated);
-      
+
       if(caloriesSum > 0){
         this.saveDailyCalories(calFormated);
       }
 
     },
 
+    // Saves sum in database
     saveDailyCalories: function(caloriesToday){
       this.calSumCol = new app.CalSumCol();
       this.calSumCol.create({id: 'caloriesToday', calories: caloriesToday, day: app.currentDate.day});

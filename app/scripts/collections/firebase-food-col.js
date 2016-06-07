@@ -1,3 +1,6 @@
+// Stores All calories for each day
+// Creates custom link for every year month and day
+
 var app = app || {};
 
 (function(){
@@ -13,10 +16,10 @@ var app = app || {};
       return url + year + '/'+ month + '/'+ day + '/food';
     },
 
+    // When called it returns sum of calories for current date
     countAll: function(){
       var allCalories = 0;
 
-      // Counts calories saved in this collection
       this.forEach(function(item){
         allCalories += item.toJSON().calories;
       });

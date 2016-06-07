@@ -1,6 +1,6 @@
 /**
-    Search View
-  ----------------
+  Search View
+
   This view is bind with search-list-col.js (colection). It mainly takes care of
   updating data which are retrieved from Nutritionix. It automaticly searches for
   food on each letter entered. Colection is formating recevied data.

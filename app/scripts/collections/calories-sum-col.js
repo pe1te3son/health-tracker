@@ -1,3 +1,4 @@
+// Stores sum of calories for each day
 var app = app || {};
 
 (function(){

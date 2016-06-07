@@ -1,3 +1,4 @@
+// Default food model
 var app = app || {};
 
 (function(){

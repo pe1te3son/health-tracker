@@ -1,3 +1,4 @@
+// Model for daily calories sum
 var app = app || {};
 
 (function(){

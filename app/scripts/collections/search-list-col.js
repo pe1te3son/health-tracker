@@ -1,3 +1,5 @@
+// Retrieves and Stores temporarily data from Nutritionix
+
 var app = app || {};
 
 (function(){

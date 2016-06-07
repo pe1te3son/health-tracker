@@ -36,6 +36,7 @@ var app = app || {};
             yearRange: 5,
             bound: false,
             onSelect: function() {
+              // Each time new date is selected this function updates view
               app.currentDate.graphPrefix = this.getMoment().format('YYYY-M-'),
               app.currentDate.year = this.getMoment().format('YYYY');
               app.currentDate.month = this.getMoment().format('MMMM');
@@ -46,6 +47,7 @@ var app = app || {};
 
             },
             onDraw: function(){
+              // Each time new month is selected this function rerenders graph
               var monthBeforeSelect = app.currentDate.month;
               app.currentDate.month = moment().month(this.calendars[0].month).format('MMMM');
 
@@ -73,8 +75,7 @@ var app = app || {};
 
     showGraph: function(){
 
-      // This function fetches data for Graph.
-      // It saves  data in this View so it can be reused on window resize.
+      // Fetches data for Graph.
 
       var self = this;
       self.dataForGraph = [];
@@ -84,7 +85,7 @@ var app = app || {};
           for(var i=1; i<app.currentDate.daysThisMonth+1; i++){
 
             if(app.graphCol.get(i)){
-              var calPerDay = parseInt(app.graphCol.get(i).toJSON().caloriesToday.calories);
+              var calPerDay = parseFloat(app.graphCol.get(i).toJSON().caloriesToday.calories);
               var dayID = app.graphCol.get(i).toJSON().caloriesToday.day;
               var dateFormated = app.currentDate.graphPrefix + dayID;
               self.dataForGraph.push([dateFormated, calPerDay]);
