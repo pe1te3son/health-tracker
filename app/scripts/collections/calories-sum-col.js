@@ -7,7 +7,7 @@ var app = app || {};
   app.CalSumCol = Backbone.Firebase.Collection.extend({
     model: app.DailyCalories,
     url: function(){
-      var url = 'https://health-tracker-janak.firebaseio.com/';
+      var url = app.firebaseUrl;
       var userId = app.userId;
       var year = app.currentDate.year;
       var month = app.currentDate.month;

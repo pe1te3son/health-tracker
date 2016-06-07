@@ -9,7 +9,9 @@ var app = app || {};
     el: '#app',
 
     events: {
-      'click #testone': 'render'
+      'click #testone': 'render',
+      'click #login': 'login',
+      'click #register': 'register'
     },
 
     initialize: function(){
@@ -74,6 +76,14 @@ var app = app || {};
       });
 
     },// initialize ends
+
+    login: function(){
+
+    },
+
+    register: function(){
+    
+    },
 
     showGraph: function(){
 
