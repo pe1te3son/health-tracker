@@ -1,4 +1,4 @@
-// Stores data for graph 
+// Stores data for graph
 
 var app = app || {};
 
@@ -8,10 +8,11 @@ var app = app || {};
   app.GraphCol = Backbone.Firebase.Collection.extend({
     url: function(){
       var url = 'https://health-tracker-janak.firebaseio.com/';
+      var userId = app.userId;
       var year = app.currentDate.year;
       var month = app.currentDate.month;
 
-      return url + year + '/' + month;
+      return url + userId + '/' + year + '/' + month;
     }
 
   });

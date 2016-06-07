@@ -2,14 +2,14 @@ var app = app || {};
 
 (function($){
 
-    'use strict';
+  'use strict';
 
   app.AppView = Backbone.View.extend({
 
     el: '#app',
 
     events: {
-      'click .pika-day': 'render'
+      'click #testone': 'render'
     },
 
     initialize: function(){
@@ -22,6 +22,10 @@ var app = app || {};
         day: moment().format('D'),
         daysThisMonth: moment().daysInMonth()
       };
+
+      // Initializes View which displays saved food
+      app.savedFoodView = new app.SavedFoodView();
+
       // Initializes the View to display search results
       app.searchView = new app.SearchView();
 
@@ -59,8 +63,6 @@ var app = app || {};
             container: document.getElementById('datepicker-container'),
         });
 
-      // Initializes View which displays saved food
-      app.savedFoodView = new app.SavedFoodView();
 
       // Display graph
       self.showGraph();
@@ -95,7 +97,6 @@ var app = app || {};
             }
 
           }
-          console.log(self.dataForGraph);
           // Build graph
           app.helpers.buildGraph(self.dataForGraph);
 

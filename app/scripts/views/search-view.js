@@ -46,8 +46,7 @@ var app = app || {};
     },
 
     render: function(){
-      console.log('rendering');
-
+      
       this.$list.html('');
 
       this.colection.each(function(item){

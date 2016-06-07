@@ -62,13 +62,14 @@ $(function(){
     setFirstDay: function(){
       var startDay = app.currentDate.graphPrefix + '1';
       return startDay;
+    },
+
+    logInForm: function(){
+      
     }
 
   };
-
+  app.userId = 'demo';
   // Create an App
   new app.AppView();
-
-
-
 });
