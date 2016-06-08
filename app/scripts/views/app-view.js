@@ -17,7 +17,8 @@ var app = app || {};
     },
 
     initialize: function(){
-      var self = this;
+      this.$formContainer = $('#form-cont');
+      app.userId = 'default';
       app.currentDate = {
         graphPrefix: moment().format('YYYY-M-'),
         year: moment().format('YYYY'),
@@ -61,7 +62,7 @@ var app = app || {};
               app.currentDate.month = moment().month(this.calendars[0].month).format('MMMM');
 
               if(monthBeforeSelect != app.currentDate.month){
-                self.showGraph();
+                app.showGraph();
               }
 
             },
@@ -70,18 +71,18 @@ var app = app || {};
 
 
       // Display graph
-      self.showGraph();
+      app.showGraph();
 
       // Listens for window resize
       // Rebuilds Graph without fetching data each time as data are saved when showGraph() has been called
       $(window).on('resize', function(){
-         app.helpers.buildGraph(self.dataForGraph);
+         app.helpers.buildGraph(app.dataForGraph);
       });
 
     },// initialize ends
 
     loginForm: function(){
-      $('#form-cont').html('').append(this.loginFormTemplate(
+      this.$formContainer.html('').append(this.loginFormTemplate(
         {
           login: true,
           id: 'login'
@@ -113,6 +114,10 @@ var app = app || {};
                   }
               } else {
                   console.log('loged in');
+                  app.userId = authData.uid;
+                  app.savedFoodView = new app.SavedFoodView();
+                  app.savedFoodView.render();
+                  app.showGraph();
               }
           });
       });
@@ -121,48 +126,49 @@ var app = app || {};
     },
 
     registerForm: function(){
-      $('#form-cont').html('').append(this.loginFormTemplate(
+      this.$formContainer.html('').append(this.loginFormTemplate(
         {
           login: false,
           id: 'register'
         }
       ));
 
-    },
+      $('#register-form').on('submit', function(e){
+        e.preventDefault();
 
-    showGraph: function(){
+        var inputEmail = $('#inputEmail').val();
+        var inputPassword = $('#inputPassword').val();
+        var confirmPassword = $('#inputPasswordConfirm').val();
+        var passwordsMatch = app.helpers.passwordMatch(inputPassword, confirmPassword);
 
-      // Fetches data for Graph.
-
-      var self = this;
-      self.dataForGraph = [];
-      app.graphCol = new app.GraphCol();
-      app.graphCol.fetch({
-        success: function(){
-          for(var i=1; i<app.currentDate.daysThisMonth+1; i++){
-
-            if(app.graphCol.get(i)){
-              var calPerDay = parseFloat(app.graphCol.get(i).toJSON().caloriesToday.calories);
-              var dayID = app.graphCol.get(i).toJSON().caloriesToday.day;
-              var dateFormated = app.currentDate.graphPrefix + dayID;
-              self.dataForGraph.push([dateFormated, calPerDay]);
-
-            }else{
-              self.dataForGraph.push([app.currentDate.graphPrefix + i , 0]);
+        if(passwordsMatch === true){
+          console.log('pass ok');
+          app.firebaseUsers.createUser({
+            email: inputEmail,
+            password: inputPassword
+          }, function(error, userData) {
+            if (error) {
+              switch (error.code) {
+                case 'EMAIL_TAKEN':
+                  console.log('The new user account cannot be created because the email is already in use.');
+                  break;
+                case 'INVALID_EMAIL':
+                  console.log('The specified email is not a valid email.');
+                  break;
+                default:
+                  console.log('Error creating user:', error);
+              }
+            } else {
+              console.log('Successfully created user account with uid:', userData.uid);
             }
+          });
+        } else {
+          console.log('password dont match');
+        }// passwordsMatch
 
-          }
-          // Build graph
-          app.helpers.buildGraph(self.dataForGraph);
+      }); // submit
 
-        },// success ends
-        error: function(){
-          console.log('fetching failed');
-        }
-      });
-
-    }// showGraph ends
-
+    }// registerForm ends
 
   });
 
