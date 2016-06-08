@@ -68,8 +68,10 @@
           <div class="col-md-6" id="saved-food-view">
 
             <div class="all-calories-cont">
-              <p id="all-calories">0.0</p>
+              <p><span id="all-calories">0.0</span><span>Kcal</span></p>
             </div>
+            <span id="date-today"></span>
+            <hr class="hr">
 
             <ul id="saved-food-list"></ul>
 
@@ -93,16 +95,12 @@
       <span class="food-item brand-name"><%= brandName %></span>
       <span class="food-item name"><%= name %></span>
       <span class="food-item calories"><%= calories %></span>
-      <span class="glyphicon glyphicon-remove-sign food-item remove-btn" aria-hidden="true"></span>
-
     </script>
 
     <script type="text/template" id="search-single-template">
       <span class="food-item brand-name"><%= brandName %></span>
       <span class="food-item name"><%= name %></span>
       <span class="food-item calories"><%= calories %></span>
-      <span class="glyphicon glyphicon-remove-sign food-item remove-btn" aria-hidden="true"></span>
-
     </script>
 
     <script type="text/template" id="login-form-template">

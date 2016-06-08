@@ -1,3 +1,6 @@
+#search-view
+  position: relative
+
 .brand-name
   font-style: italic
 
@@ -5,11 +8,21 @@
   display: inline-block
 
 #search-result-list
+  display: none
+  position: absolute
+  top: 35px
+  left: 20px
+  z-index: 10000
   list-style: none
   padding: 0
   margin: 0
+  background: $color1
+  color: $color2
+  width: 90%
+  border-radius: 0 0 10px 10px
+  padding-bottom: 10px
   li
-    padding: 5px 10px
+    padding: 8px 10px
     &:hover
       cursor: pointer
-      background: lightgray
+      background: lighten($color1, 10%)

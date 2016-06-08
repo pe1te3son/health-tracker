@@ -18,6 +18,7 @@ var app = app || {};
       this.collection = new app.FirebaseFoodCol();
       this.$list = $('#saved-food-list');
       this.$caloriesContainer = $('#all-calories');
+      this.$dateHolder = $('#date-today');
       this.listenTo(this.collection, 'remove', this.render);
       this.listenTo(this.collection, 'add', this.render);
 
@@ -35,6 +36,20 @@ var app = app || {};
 
       // Counts and updates calories each time data are upated and saves them
       this.displayCaloriesSum();
+
+      // Appends current date
+      this.$dateHolder.html('').append(
+        '<span class="day-of-week">' +
+        app.currentDate.dayOfWeek +
+        '</span>' +
+        '<span class="date">' +
+        app.currentDate.month +
+        ' ' +
+        app.currentDate.day +
+        ' ' +
+        app.currentDate.year +
+        '</span>'
+      );
     },
 
     addOne: function(food){
