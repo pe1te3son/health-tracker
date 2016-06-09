@@ -7,6 +7,7 @@ var app = app || {};
 
   app.SearchSingleView = Backbone.View.extend({
     tagName: 'li',
+    className: 'col-xs-12',
 
     singleFoodTemplate: _.template($('#search-single-template').html()),
 

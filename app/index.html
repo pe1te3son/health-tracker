@@ -24,26 +24,30 @@
     <!--[if lt IE 10]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <div class="wrapper">
+    <div class="wrapper" id="app">
 
-      <div  id="app" class="container">
+      <header class="header">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-6">
+              <h1 class="app-title">Health Tracker</h1>
+            </div>
 
-        <header class="header row">
-          <div class="col-sm-6">
-            <h1 class="app-title">Health Tracker</h1>
+            <div class="col-sm-6 navigation-form">
+
+              <ul class="list-inline nav-list">
+                <li class="nav-item" id="login">Login</li>
+                <li class="nav-item" id="register">Register</li>
+              </ul>
+
+              <div id="form-cont"></div>
+
+            </div>
           </div>
+        </div>
+      </header>
 
-          <div class="col-sm-6">
-
-            <ul class="list-inline nav-list">
-              <li class="nav-item" id="login">Login</li>
-              <li class="nav-item" id="register">Register</li>
-            </ul>
-
-            <div id="form-cont"></div>
-
-          </div>
-        </header>
+      <div class="container">
 
         <section class="row info-section">
           <div class="col-sm-6" id="search-view">
@@ -79,9 +83,13 @@
           <div class="col-sm-6" id="saved-food-view">
 
             <div class="all-calories-cont">
-              <p><span id="all-calories">0.0</span><span>Calories</span></p>
+              <div>
+                <span id="all-calories">0.0</span>
+                <span>Calories</span>
+              </div>
+              <span id="date-today"></span>
             </div>
-            <span id="date-today"></span>
+
             <hr class="hr">
 
             <ul id="saved-food-list"></ul>
@@ -103,15 +111,23 @@
     </div><!-- wrapper/container ends -->
 
     <script type="text/template" id="saved-single-template">
-      <span class="food-item brand-name"><%= brandName %></span>
-      <span class="food-item food-name">- <%= name %></span>
-      <span class="food-item food-calories"><%= calories %></span>
+      <div class="col-xs-10">
+        <span class="food-item brand-name"><%= brandName %></span>
+        <span class="food-item food-name">- <%= name %></span>
+      </div>
+      <div class="col-xs-2 food-calories">
+        <span class="food-item"><%= calories %></span>
+      </div>
     </script>
 
     <script type="text/template" id="search-single-template">
-      <span class="search-item brand-name"><%= brandName %></span>
-      <span class="search-item food-name">- <%= name %></span>
-      <span class="search-item food-calories"><%= calories %></span>
+      <div class="col-xs-10">
+        <span class="search-item brand-name"><%= brandName %></span>
+        <span class="search-item food-name">- <%= name %></span>
+      </div>
+      <div class="col-xs-2 food-calories">
+        <span class="search-item"><%= calories %></span>
+      </div>
     </script>
 
     <script type="text/template" id="login-form-template">

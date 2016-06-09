@@ -6,6 +6,7 @@ var app = app || {};
 
   app.SavedSingleView = Backbone.View.extend({
     tagName: 'li',
+    className: 'col-xs-12',
 
     singleFoodTemplate: _.template($('#saved-single-template').html()),
 
@@ -14,7 +15,6 @@ var app = app || {};
     },
 
     render: function(){
-
       this.$el.html(this.singleFoodTemplate(this.model.attributes));
       return this;
 
