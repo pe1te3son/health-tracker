@@ -1,5 +1,6 @@
 #search-view
   position: relative
+  padding-top: 15px
 
 .brand-name
   font-style: italic
@@ -8,21 +9,43 @@
   display: inline-block
 
 #search-result-list
-  display: none
-  position: absolute
-  top: 35px
-  left: 20px
-  z-index: 10000
   list-style: none
   padding: 0
-  margin: 0
-  background: $color1
-  color: $color2
-  width: 90%
-  border-radius: 0 0 10px 10px
+  margin-top: 20px
   padding-bottom: 10px
+  .food-calories
+    padding-right: 15px
   li
-    padding: 8px 10px
+    padding: 3px
+    &:nth-child(odd)
+      background: darken($color2, 5%)
     &:hover
       cursor: pointer
-      background: lighten($color1, 10%)
+      background: $color3
+      color: $color2
+
+.search-controls
+  font-size: 1.2em
+
+.search-active
+  background: $color5
+  color: $color2
+
+.search-control
+  padding: 6px
+  border-radius: 5px
+  &:hover
+    cursor: pointer
+    @extend .search-active
+
+.search-heading
+  display: inline-block
+  width: 49%
+  color: $color1
+
+.calories-heading
+  text-align: right
+
+.search-result-cont
+  margin-top: 20px
+  border-bottom: 1px solid

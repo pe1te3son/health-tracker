@@ -52,7 +52,7 @@ var app = app || {};
               app.currentDate.year = this.getMoment().format('YYYY');
               app.currentDate.month = this.getMoment().format('MMMM');
               app.currentDate.day =  this.getMoment().format('D');
-              app.currentDate.dayOfWeek =  this.getMoment().format('DDDD');
+              app.currentDate.dayOfWeek =  this.getMoment().format('dddd');
               app.currentDate.daysThisMonth = this.getMoment().daysInMonth();
               app.savedFoodView.initialize();
               app.savedFoodView.render();
@@ -70,7 +70,6 @@ var app = app || {};
             },
             container: document.getElementById('datepicker-container'),
         });
-
 
       // Display graph
       app.showGraph();

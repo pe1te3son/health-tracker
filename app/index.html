@@ -45,8 +45,8 @@
           </div>
         </header>
 
-        <div class="row">
-          <div class="col-md-6" id="search-view">
+        <section class="row info-section">
+          <div class="col-sm-6" id="search-view">
 
             <form class="" id="search-form">
               <div class="form-group">
@@ -55,7 +55,18 @@
               </div>
             </form>
 
-            <ul id="search-result-list"></ul>
+            <div class="search-controls">
+              <span class="glyphicon glyphicon-calendar search-control search-active" aria-hidden="true"></span>
+              <span class="glyphicon glyphicon-search search-control" aria-hidden="true"></span>
+            </div>
+
+            <div class="search-result-cont">
+              <span class="product-heading search-heading">Product</span>
+              <span class="calories-heading search-heading">Calories</span>
+
+              <ul id="search-result-list"></ul>
+
+            </div>
 
             <div id="datepicker">
               <label class="sr-only" for="datepicker-input">enter date: dd-mm-yyyy</label>
@@ -65,10 +76,10 @@
 
           </div><!-- search-view ends -->
 
-          <div class="col-md-6" id="saved-food-view">
+          <div class="col-sm-6" id="saved-food-view">
 
             <div class="all-calories-cont">
-              <p><span id="all-calories">0.0</span><span>Kcal</span></p>
+              <p><span id="all-calories">0.0</span><span>Calories</span></p>
             </div>
             <span id="date-today"></span>
             <hr class="hr">
@@ -77,15 +88,15 @@
 
           </div><!-- saved-food-view ends -->
 
-        </div><!-- row/app ends -->
+        </section><!-- row/app ends -->
 
-        <div class="row">
+        <section class="row graph-section">
 
           <div class="col-xs-12">
-            <div id="chartdiv" style="height: 400px; width: 100%;"></div>
+            <div id="chartdiv" style="height: 300px; width: 100%;"></div>
           </div>
 
-        </div>
+        </section>
 
       </div><!-- app ends -->
 
@@ -93,14 +104,14 @@
 
     <script type="text/template" id="saved-single-template">
       <span class="food-item brand-name"><%= brandName %></span>
-      <span class="food-item name"><%= name %></span>
-      <span class="food-item calories"><%= calories %></span>
+      <span class="food-item food-name">- <%= name %></span>
+      <span class="food-item food-calories"><%= calories %></span>
     </script>
 
     <script type="text/template" id="search-single-template">
-      <span class="food-item brand-name"><%= brandName %></span>
-      <span class="food-item name"><%= name %></span>
-      <span class="food-item calories"><%= calories %></span>
+      <span class="search-item brand-name"><%= brandName %></span>
+      <span class="search-item food-name">- <%= name %></span>
+      <span class="search-item food-calories"><%= calories %></span>
     </script>
 
     <script type="text/template" id="login-form-template">
