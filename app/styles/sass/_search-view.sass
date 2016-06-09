@@ -1,6 +1,5 @@
 .search-result-cont
-  display: none
-  margin-top: 20px
+  display: block
 
 #search-view
   position: relative
@@ -12,8 +11,11 @@
 #search-result-list
   list-style: none
   padding: 0
-  margin-top: 20px
-  padding-bottom: 10px
+  margin: 20px 0
+  height: 300px
+  overflow: hidden
+  &:hover
+    overflow: auto
   li
     padding: 3px
     &:nth-child(odd)
@@ -25,6 +27,7 @@
 
 .search-controls
   font-size: 1.2em
+  margin: 24px 0 20px
 
 .search-active
   background: $color5
@@ -40,7 +43,19 @@
 .search-heading
   display: inline-block
   width: 49%
-  color: $color1
+  color: $color3
 
 .calories-heading
   text-align: right
+
+#search-menu-up-btn
+  display: block
+  margin: 20px auto
+  width: 100%
+  padding: 10px
+  font-size: 1.1em
+  background: $color5
+  color: $color2
+  border: none
+  &:hover
+    background: lighten($color5, 5%)

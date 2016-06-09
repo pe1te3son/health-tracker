@@ -1,3 +1,7 @@
+.app-title
+  margin: 0
+  margin: 15px 0
+
 .header
   background: $color1
   color: $color2
@@ -6,6 +10,9 @@
 .nav-list
   padding: 25px
   text-align: right
+  margin: 0
+  background: $color4
+  z-index: 100000
 
 .form-unit
   display: block
@@ -14,3 +21,14 @@
   &:hover
     cursor: pointer
     text-decoration: underline
+
+#form-cont
+  position: absolute
+  top: 70px
+  right: 15px
+  left: 15px
+  padding: 20px
+  background: $color4
+  z-index: 10000
+  box-shadow: 0 5px 15px #666
+  border-radius: 0 0 10px 10px

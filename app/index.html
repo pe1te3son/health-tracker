@@ -35,7 +35,7 @@
 
             <div class="col-sm-6 navigation-form">
 
-              <ul class="list-inline nav-list">
+              <ul class="list-inline nav-list text-xs-center">
                 <li class="nav-item" id="login">Login</li>
                 <li class="nav-item" id="register">Register</li>
               </ul>
@@ -50,12 +50,12 @@
       <div class="container">
 
         <section class="row info-section">
-          <div class="col-sm-6" id="search-view">
+          <div class="col-sm-6 col-xs-12" id="search-view">
 
             <form class="" id="search-form">
               <div class="form-group">
                 <label class="sr-only" for="search-input">Search input</label>
-                <input type="text" class="form-control" id="search-input" placeholder="Search">
+                <input type="text" class="form-control" id="search-input" placeholder="Search food product">
               </div>
             </form>
 
@@ -63,13 +63,13 @@
               <span class="glyphicon glyphicon-calendar search-control search-active" aria-hidden="true"></span>
               <span class="glyphicon glyphicon-search search-control" aria-hidden="true"></span>
             </div>
-
+            <hr class="hr">
             <div class="search-result-cont">
               <span class="product-heading search-heading">Product</span>
               <span class="calories-heading search-heading">Calories</span>
 
-              <ul id="search-result-list"></ul>
-
+              <ul id="search-result-list" class="col-xs-12"></ul>
+              <button id="search-menu-up-btn" class="visible-xs"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span></button>
             </div>
 
             <div id="datepicker">
@@ -80,7 +80,7 @@
 
           </div><!-- search-view ends -->
 
-          <div class="col-sm-6" id="saved-food-view">
+          <div class="col-sm-6 col-xs-12" id="saved-food-view">
 
             <div class="all-calories-cont">
               <div>
@@ -92,7 +92,7 @@
 
             <hr class="hr">
 
-            <ul id="saved-food-list"></ul>
+            <ul id="saved-food-list" class="col-xs-12"></ul>
 
           </div><!-- saved-food-view ends -->
 
