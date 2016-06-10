@@ -64,8 +64,8 @@
             </form>
 
             <div class="search-controls">
-              <span class="glyphicon glyphicon-calendar search-control search-active" aria-hidden="true"></span>
-              <span class="glyphicon glyphicon-search search-control" aria-hidden="true"></span>
+              <span id="datepicker-btn" class="glyphicon glyphicon-calendar search-control selected-btn-search-view" aria-hidden="true"></span>
+              <span id="search-list-btn" class="glyphicon glyphicon-search search-control" aria-hidden="true"></span>
             </div>
             <hr class="hr">
             <div class="search-result-cont">
@@ -73,7 +73,7 @@
               <span class="calories-heading search-heading">Calories</span>
 
               <ul id="search-result-list" class="col-xs-12"></ul>
-              <button id="search-menu-up-btn" class="visible-xs"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span></button>
+              <button id="search-menu-toggle-btn" class="visible-xs"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span></button>
             </div>
 
             <div id="datepicker">
@@ -112,7 +112,9 @@
         </section>
 
       </div><!-- app ends -->
+      <footer class="footer">
 
+      </footer>
     </div><!-- wrapper/container ends -->
 
     <script type="text/template" id="saved-single-template">

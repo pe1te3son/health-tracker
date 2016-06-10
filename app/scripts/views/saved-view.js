@@ -13,7 +13,6 @@ var app = app || {};
 
   app.SavedFoodView = Backbone.View.extend({
     el: '#saved-food-view',
-    logedin: false,
     initialize: function(){
       this.collection = new app.FirebaseFoodCol();
       this.$list = $('#saved-food-list');
@@ -34,7 +33,7 @@ var app = app || {};
 
       // Counts and updates calories each time data are upated and saves them
       this.displayCaloriesSum();
-
+      
       // Appends current date
       this.$dateHolder.html('').append(
         '<span class="day-of-week">' +

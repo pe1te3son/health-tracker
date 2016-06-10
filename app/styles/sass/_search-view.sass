@@ -2,8 +2,9 @@
   display: none
 
 #search-view
+  //min-height: 500px
   position: relative
-  margin: 20px 0 30px
+  margin: 20px 0 0
 
 .brand-name
   font-style: italic
@@ -28,8 +29,9 @@
 .search-controls
   font-size: 1.2em
   margin: 30px 0 0
+  padding-left: 15px
 
-.search-active
+.selected-btn-search-view
   background: $color5
   color: $color2
 
@@ -38,7 +40,7 @@
   border-radius: 5px
   &:hover
     cursor: pointer
-    @extend .search-active
+    @extend .selected-btn-search-view
 
 .search-heading
   display: inline-block
@@ -48,7 +50,7 @@
 .calories-heading
   text-align: right
 
-#search-menu-up-btn
+#search-menu-toggle-btn
   display: block
   margin: 20px auto
   width: 100%
