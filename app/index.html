@@ -36,7 +36,7 @@
             <div class="col-sm-6 navigation-form">
 
               <ul class="nav-list text-xs-center">
-                <li class="nav-item" id="login">Login</li>
+                <li class="nav-item" id="login">Log in</li>
                 <li class="nav-item" id="register">Register</li>
               </ul>
 
@@ -80,6 +80,7 @@
               <label class="sr-only" for="datepicker-input">enter date: dd-mm-yyyy</label>
               <input type="text" id="datepicker-input" style="display: none">
               <div id="datepicker-container"></div>
+              <hr class="hr">
             </div>
 
           </div><!-- search-view ends -->
@@ -87,7 +88,7 @@
           <div class="col-sm-6 col-xs-12" id="saved-food-view">
 
             <div class="all-calories-cont">
-              <div>
+              <div class="calories-sum">
                 <span id="all-calories">0.0</span>
                 <span>Calories</span>
               </div>
@@ -105,7 +106,7 @@
         <section class="row graph-section">
 
           <div class="col-xs-12">
-            <div id="chartdiv" style="height: 300px; width: 100%;"></div>
+            <div id="chartdiv" style="height: 280px; width: 100%;"></div>
           </div>
 
         </section>
@@ -159,7 +160,7 @@
         <div class="form-group">
           <div class="col-xs-12" id="login-btn-cont">
               <% if (login) { %>
-                <button type="submit" class="btn btn-default" id="login-btn">Sign in</button>
+                <button type="submit" class="btn btn-default" id="login-btn">Log in</button>
               <% } else { %>
                 <button type="submit" class="btn btn-default" id="register-btn">Register</button>
               <% } %>

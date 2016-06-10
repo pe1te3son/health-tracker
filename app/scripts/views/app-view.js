@@ -18,6 +18,8 @@ var app = app || {};
 
     initialize: function(){
       this.$formContainer = $('#form-cont');
+      this.$registerBtn = $('#register');
+      this.$loginBtn =   $('#login');
       app.userId = 'default';
       app.currentDate = {
         graphPrefix: moment().format('YYYY-M-'),
@@ -95,7 +97,15 @@ var app = app || {};
 
     },
 
-    loginForm: function(){
+    loginForm: function(e){
+      this.$registerBtn.removeClass('form-selected');
+
+      if(!this.$loginBtn.hasClass('form-selected')){
+        this.$loginBtn.addClass('form-selected');
+      }else{
+        this.$loginBtn.removeClass('form-selected');
+      }
+
       this.$formContainer.html('').append(this.loginFormTemplate(
         {
           login: true,
@@ -141,6 +151,14 @@ var app = app || {};
     },
 
     registerForm: function(){
+      this.$loginBtn.removeClass('form-selected');
+
+      if(!this.$registerBtn.hasClass('form-selected')){
+        this.$registerBtn.addClass('form-selected');
+      }else{
+        this.$registerBtn.removeClass('form-selected');
+      }
+
       this.$formContainer.html('').append(this.loginFormTemplate(
         {
           login: false,

@@ -26,7 +26,7 @@ var app = app || {};
     },
 
     searchData: function(){
-
+      var self = this;
       // Blocks page from reloading in case user presses Enter
       this.$searchField.keydown(function(e){
         if(e.which === ENTER_KEY){
@@ -41,12 +41,14 @@ var app = app || {};
       this.colection.fetch({
         error: function(){
           console.log('NO CONECTION');
+          self.$list.html('');
+          self.$list.append('<h2>Oops, something went wrong!</h2><p>Please try later or reload the page.</p>');
         }
       });
     },
 
     render: function(){
-      
+
       this.$list.html('');
 
       this.colection.each(function(item){
