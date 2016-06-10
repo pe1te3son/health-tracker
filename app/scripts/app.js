@@ -72,7 +72,6 @@ $(function(){
       }
     }
 
-
   };
 
   app.showGraph = function(){

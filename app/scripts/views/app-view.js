@@ -79,8 +79,21 @@ var app = app || {};
       $(window).on('resize', function(){
          app.helpers.buildGraph(app.dataForGraph);
       });
-
     },// initialize ends
+
+    switchData: function(container, attrVal){
+      if(container.attr('data') === attrVal){
+        container.slideUp('fast');
+        container.attr('data', '');
+      } else if(container.attr('data') !== attrVal && container.attr('data') != '' ){
+        container.slideUp('fast').slideDown('fast');
+        container.attr('data', attrVal);
+      }else{
+        container.attr('data', attrVal);
+        container.slideDown('fast');
+      }
+
+    },
 
     loginForm: function(){
       this.$formContainer.html('').append(this.loginFormTemplate(
@@ -123,6 +136,7 @@ var app = app || {};
           });
       });
 
+      this.switchData(this.$formContainer, 'login');
 
     },
 
@@ -169,6 +183,7 @@ var app = app || {};
 
       }); // submit
 
+        this.switchData(this.$formContainer, 'register');
     }// registerForm ends
 
   });
