@@ -71,8 +71,8 @@ var app = app || {};
 
       }.bind(this));
 
-      if(!this.$searchMenuToggleBtn.hasClass('glyphicon-menu-up')){
-        this.$searchMenuToggleBtn.addClass('glyphicon-menu-up').removeClass('glyphicon-menu-down');
+      if(!this.$searchMenuToggleBtn.hasClass('fa-angle-double-up')){
+        this.$searchMenuToggleBtn.addClass('fa-angle-double-up').removeClass('fa-angle-double-down');
         this.$list.slideDown('fast');
       }
 
@@ -94,7 +94,7 @@ var app = app || {};
     },
 
     toggleSearchResults: function(e){
-      this.$searchMenuToggleBtn.toggleClass('glyphicon-menu-up glyphicon-menu-down');
+      this.$searchMenuToggleBtn.toggleClass('fa-angle-double-up fa-angle-double-down');
       this.$list.slideToggle('fast');
     }
 

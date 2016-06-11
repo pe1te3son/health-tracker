@@ -50,8 +50,6 @@ $(function(){
             },
             yaxis: {
               min: 0,
-              // label: 'Calories',
-              // labelRenderer: $.jqplot.CanvasAxisLabelRenderer
             }
           },
           cursor: {
