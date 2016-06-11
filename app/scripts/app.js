@@ -16,7 +16,10 @@ $(function(){
           data
         ],
         {
-          title:'Calories ' + app.currentDate.month + ' ' + app.currentDate.year,
+          title:{
+            text: 'Calories ' + app.currentDate.month + ' ' + app.currentDate.year,
+            textColor: '#3F5668'
+          },
           // Turns on animatino for all series in this plot.
           animate: true,
           animateReplot: true,
@@ -52,8 +55,14 @@ $(function(){
             }
           },
           cursor: {
-            zoom: true
+            show: true,
+            zoom: true,
+            looseZoom: false,
+            showHorizontalLine: true,
           },
+          grid: {
+            background: '#ffffff'
+          }
 
         });
 

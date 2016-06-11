@@ -21,7 +21,6 @@ var app = app || {};
       return this;
 
     },
-
     foodClicked: function(){
       app.savedFoodView.addOne(this);
     }
