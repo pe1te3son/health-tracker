@@ -100,7 +100,7 @@ var app = app || {};
       this.$registerBtn.removeClass('form-selected');
 
       this.$loginBtn.toggleClass('form-selected');
-    
+
       this.$formContainer.html('').append(this.loginFormTemplate(
         {
           login: true,
@@ -111,11 +111,13 @@ var app = app || {};
       $('#login-form').on('submit', function(e){
         e.preventDefault();
 
-        var loginEmail = $('#inputEmail').val();
-        var loginPassword = $('#inputPassword').val();
+        app.helpers.spinner($('#spinner-cont'), 'insert');
+
+        var $loginEmail = $('#inputEmail').val();
+        var $loginPassword = $('#inputPassword').val();
         app.firebaseUsers.authWithPassword({
-          email    : loginEmail,
-          password : loginPassword
+          email    : $loginEmail,
+          password : $loginPassword
         }, function (error, authData) {
               if (error) {
                   switch (error.code) {
@@ -138,6 +140,8 @@ var app = app || {};
                   app.savedFoodView.render();
                   app.showGraph();
               }
+
+              app.helpers.spinner($('#spinner-cont'), 'remove');
           });
       });
 
@@ -163,17 +167,17 @@ var app = app || {};
 
       $('#register-form').on('submit', function(e){
         e.preventDefault();
-
-        var inputEmail = $('#inputEmail').val();
-        var inputPassword = $('#inputPassword').val();
-        var confirmPassword = $('#inputPasswordConfirm').val();
-        var passwordsMatch = app.helpers.passwordMatch(inputPassword, confirmPassword);
+        app.helpers.spinner($('#spinner-cont'), 'insert');
+        var $inputEmail = $('#inputEmail').val();
+        var $inputPassword = $('#inputPassword').val();
+        var $confirmPassword = $('#inputPasswordConfirm').val();
+        var passwordsMatch = app.helpers.passwordMatch($inputPassword, $confirmPassword);
 
         if(passwordsMatch === true){
           console.log('pass ok');
           app.firebaseUsers.createUser({
-            email: inputEmail,
-            password: inputPassword
+            email: $inputEmail,
+            password: $inputPassword
           }, function(error, userData) {
             if (error) {
               switch (error.code) {
@@ -189,11 +193,11 @@ var app = app || {};
             } else {
               console.log('Successfully created user account with uid:', userData.uid);
             }
+            app.helpers.spinner($('#spinner-cont'), 'remove');
           });
         } else {
           console.log('password dont match');
         }// passwordsMatch
-
       }); // submit
 
         this.switchData(this.$formContainer, 'register');

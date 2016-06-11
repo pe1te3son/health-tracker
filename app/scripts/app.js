@@ -77,6 +77,24 @@ $(function(){
       }else{
         return false;
       }
+    },
+
+    spinner: function($container, $option){
+      /**
+        * @desc adds or removes spinner
+        * @param jquery selector $container - select where to append spinner
+        * @param string $option - choose what to do, its either 'insert' or 'remove'
+      */
+
+      var cont = $container;
+      var opt = $option;
+
+      if(opt === 'insert'){
+        cont.append('<i class="fa fa-spinner fa-spin fa-lg"></i><span class="sr-only">Loading...</span>');
+      } else if(opt === 'remove'){
+        cont.html('');
+      }
+
     }
 
   };
