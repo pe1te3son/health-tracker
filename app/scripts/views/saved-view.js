@@ -20,6 +20,7 @@ var app = app || {};
       this.$dateHolder = $('#date-today');
       this.listenTo(this.collection, 'remove', this.render);
       this.listenTo(this.collection, 'add', this.render);
+      this.render();
     },
 
     render: function(){
@@ -33,20 +34,8 @@ var app = app || {};
 
       // Counts and updates calories each time data are upated and saves them
       this.displayCaloriesSum();
-      
-      // Appends current date
-      this.$dateHolder.html('').append(
-        '<span class="day-of-week">' +
-        app.currentDate.dayOfWeek +
-        '</span>' +
-        '<span class="date">' +
-        app.currentDate.month +
-        ' ' +
-        app.currentDate.day +
-        ' ' +
-        app.currentDate.year +
-        '</span>'
-      );
+      // Updates selected date
+      this.displayCurentDate();
     },
 
     addOne: function(food){
@@ -71,6 +60,22 @@ var app = app || {};
       this.calSumCol = new app.CalSumCol();
       this.calSumCol.create({id: 'caloriesToday', calories: caloriesToday, day: app.currentDate.day});
 
+    },
+
+    displayCurentDate: function(){
+      // Appends current date
+      this.$dateHolder.html('').append(
+        '<span class="day-of-week">' +
+        app.currentDate.dayOfWeek +
+        '</span>' +
+        '<span class="date">' +
+        app.currentDate.month +
+        ' ' +
+        app.currentDate.day +
+        ' ' +
+        app.currentDate.year +
+        '</span>'
+      );
     }
 
   });

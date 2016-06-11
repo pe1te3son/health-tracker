@@ -57,7 +57,6 @@ var app = app || {};
               app.currentDate.dayOfWeek =  this.getMoment().format('dddd');
               app.currentDate.daysThisMonth = this.getMoment().daysInMonth();
               app.savedFoodView.initialize();
-              app.savedFoodView.render();
 
             },
             onDraw: function(){
@@ -100,12 +99,8 @@ var app = app || {};
     loginForm: function(e){
       this.$registerBtn.removeClass('form-selected');
 
-      if(!this.$loginBtn.hasClass('form-selected')){
-        this.$loginBtn.addClass('form-selected');
-      }else{
-        this.$loginBtn.removeClass('form-selected');
-      }
-
+      this.$loginBtn.toggleClass('form-selected');
+    
       this.$formContainer.html('').append(this.loginFormTemplate(
         {
           login: true,

@@ -16,7 +16,7 @@ $(function(){
           data
         ],
         {
-          title:'Calories this month',
+          title:'Calories ' + app.currentDate.month + ' ' + app.currentDate.year,
           // Turns on animatino for all series in this plot.
           animate: true,
           animateReplot: true,
@@ -34,7 +34,7 @@ $(function(){
           },
 
           series:[
-            { color:'#5FAB78'},
+            { color:'#F39D56'},
 
           ],
 
@@ -47,8 +47,8 @@ $(function(){
             },
             yaxis: {
               min: 0,
-              label: 'Calories',
-              labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+              // label: 'Calories',
+              // labelRenderer: $.jqplot.CanvasAxisLabelRenderer
             }
           },
           cursor: {

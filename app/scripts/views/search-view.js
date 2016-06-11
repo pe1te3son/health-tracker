@@ -17,7 +17,8 @@ var app = app || {};
     events: {
       'input #search-input': 'searchData',
       'click #datepicker-btn': 'showCalendar',
-      'click #search-list-btn': 'showSearchList'
+      'click #search-list-btn': 'showSearchList',
+      'click #search-menu-toggle-btn': 'toggleSearchResults'
     },
 
     initialize: function(){
@@ -29,6 +30,7 @@ var app = app || {};
       this.listenTo(this.colection, 'sync', this.render);
       this.$datepickerBtn = $('#datepicker-btn');
       this.$searchListBtn = $('#search-list-btn');
+      this.$searchMenuToggleBtn = $('#search-menu-toggle-btn').children().first();
 
 
     },
@@ -37,7 +39,7 @@ var app = app || {};
       var self = this;
 
       self.showSearchList();
-      
+
       // Blocks page from reloading in case user presses Enter
       this.$searchField.keydown(function(e){
         if(e.which === ENTER_KEY){
@@ -68,6 +70,12 @@ var app = app || {};
         this.$list.append(foodview.render().el);
 
       }.bind(this));
+
+      if(!this.$searchMenuToggleBtn.hasClass('glyphicon-menu-up')){
+        this.$searchMenuToggleBtn.addClass('glyphicon-menu-up').removeClass('glyphicon-menu-down');
+        this.$list.slideDown('fast');
+      }
+
     },
 
     showCalendar: function(e){
@@ -83,6 +91,11 @@ var app = app || {};
       this.$searchListBtn.addClass('selected-btn-search-view');
       this.$datepicker.hide();
       this.$listContainer.show();
+    },
+
+    toggleSearchResults: function(e){
+      this.$searchMenuToggleBtn.toggleClass('glyphicon-menu-up glyphicon-menu-down');
+      this.$list.slideToggle('fast');
     }
 
   });
