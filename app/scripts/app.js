@@ -18,7 +18,8 @@ $(function(){
         {
           title:{
             text: 'Calories ' + app.currentDate.month + ' ' + app.currentDate.year,
-            textColor: '#3F5668'
+            textColor: '#000',
+            fontFamily: '"Ubuntu", "sans-serif"'
           },
           // Turns on animatino for all series in this plot.
           animate: true,
@@ -35,9 +36,15 @@ $(function(){
               show: false
             }
           },
+          axesDefaults: {
+               tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
+               tickOptions: {
+                 textColor: '#000'
+               }
+           },
 
           series:[
-            { color:'#F39D56'},
+            { color:'#A9ADD3'},
 
           ],
 
@@ -50,6 +57,7 @@ $(function(){
             },
             yaxis: {
               min: 0,
+
             }
           },
           cursor: {
@@ -60,7 +68,8 @@ $(function(){
           },
           grid: {
             background: '#ffffff'
-          }
+          },
+
 
         });
 
