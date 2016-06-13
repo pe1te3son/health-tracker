@@ -49,14 +49,10 @@
 
             <div class="col-sm-6 navigation-form">
 
-              <ul id="login-controls" class="nav-list text-xs-center">
-
-              </ul>
+              <ul id="login-controls" class="nav-list text-xs-center"></ul>
 
               <div id="form-wrapper">
-                <div id="form-cont">
-
-                </div>
+                <div id="form-cont"></div>
               </div>
 
             </div><!-- navigation-form ends -->
@@ -94,7 +90,6 @@
             </div>
 
             <div id="datepicker">
-              <label class="sr-only" for="datepicker-input">enter date: dd-mm-yyyy</label>
               <input type="text" id="datepicker-input" style="display: none">
               <div id="datepicker-container"></div>
               <hr class="hr">
@@ -174,8 +169,8 @@
 
     <script type="text/template" id="login-form-template">
       <form class="form-horizontal form-unit" id="<%= id  %>-form">
-        <div class="form-group error-msg-cont">
-          <p class="col-xs-12">The specified user account email is invalid.</p>
+        <div class="form-group">
+          <p class="col-xs-12" id="error-msg-cont"></p>
         </div>
         <div class="form-group">
           <label for="inputEmail" class="sr-only control-label">Email</label>

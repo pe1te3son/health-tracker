@@ -86,7 +86,7 @@ $(function(){
       return startDay;
     },
 
-    passwordMatch: function(pass1, pass2){
+    passwordsMatch: function(pass1, pass2){
       if(pass1 === pass2){
         return true;
       }else{

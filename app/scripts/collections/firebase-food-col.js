@@ -17,10 +17,6 @@ var app = app || {};
       return url + userId + '/' + year + '/'+ month + '/'+ day + '/food';
     },
 
-    initialize: function(){
-      console.log('data created');
-      console.log(app.userId);
-    },
     // When called it returns sum of calories for current date
     countAll: function(){
       var allCalories = 0;

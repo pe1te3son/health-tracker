@@ -56,7 +56,7 @@ var app = app || {};
               app.currentDate.dayOfWeek =  this.getMoment().format('dddd');
               app.currentDate.daysThisMonth = this.getMoment().daysInMonth();
               // Stop all listeners in current saved food view
-              // and then reintialize view with new database 
+              // and then reintialize view with new database
               app.savedFoodView.stopListening();
               app.savedFoodCollection = new app.FirebaseFoodCol();
               app.savedFoodView.initialize();
@@ -82,22 +82,30 @@ var app = app || {};
       });
     },// initialize ends
 
-    switchForms: function(container, attrVal){
-      if(attrVal === 'none'){
+    switchForms: function($container, $attrVal){
+      /**
+        * @desc This function either slides up or slides down form in header,
+        * it doesn`t append any content. It is purely to show or hide element based
+        * on its hook.
+        * @param jquery selector $container - dom element to slide
+        * @param string $attrVal - data attribute value to hook onto
+      */
+      if($attrVal === 'none'){
 
-        if(typeof container !== 'undefined'){
-          container.slideUp('fast');
+        $container.attr('data', '');
+        if(typeof $container !== 'undefined'){
+          $container.slideUp(100);
         }
 
-      }else if(container.attr('data') === attrVal){
-        container.slideUp('fast');
-        container.attr('data', '');
-      } else if(container.attr('data') !== attrVal && container.attr('data') != '' ){
-        container.slideUp('fast').slideDown('fast');
-        container.attr('data', attrVal);
+      }else if($container.attr('data') === $attrVal){
+        $container.slideUp(100);
+        $container.attr('data', '');
+      } else if($container.attr('data') !== $attrVal && $container.attr('data') != '' ){
+        $container.slideUp(100).slideDown('fast');
+        $container.attr('data', $attrVal);
       }else{
-        container.attr('data', attrVal);
-        container.slideDown('fast');
+        $container.attr('data', $attrVal);
+        $container.slideDown('fast');
       }
 
     },
@@ -117,9 +125,10 @@ var app = app || {};
         e.preventDefault();
         app.helpers.spinner($('#spinner-cont'), 'insert');
 
-        var $errorCont = $('.error-msg-cont');
+        var $errorCont = $('#error-msg-cont');
         var $loginEmail = $('#inputEmail').val();
         var $loginPassword = $('#inputPassword').val();
+        var errorMsg = '';
         app.firebaseUsers.authWithPassword({
           email    : $loginEmail,
           password : $loginPassword
@@ -127,17 +136,19 @@ var app = app || {};
               if (error) {
                   switch (error.code) {
                       case 'INVALID_EMAIL':
-                          console.log('The specified user account email is invalid.');
+                          errorMsg += '* The specified user account email is invalid.';
                           break;
                       case 'INVALID_PASSWORD':
-                          console.log('The specified user account password is incorrect.');
+                          errorMsg += '* The specified user account or password is incorrect.';
                           break;
                       case 'INVALID_USER':
-                          console.log('The specified user account does not exist.');
+                          errorMsg += '* The specified user account does not exist.';
                           break;
                       default:
-                          console.log('Error logging user in:', error);
+                          errorMsg = 'Error logging user in: ' + error;
                   }
+
+                  $errorCont.html('').append(errorMsg);
               } else {
                   self.healthTrackerCreateUser();
                   app.savedFoodView.render();
@@ -173,34 +184,54 @@ var app = app || {};
         var $inputEmail = $('#inputEmail').val();
         var $inputPassword = $('#inputPassword').val();
         var $confirmPassword = $('#inputPasswordConfirm').val();
-        var passwordsMatch = app.helpers.passwordMatch($inputPassword, $confirmPassword);
+        var $errorCont = $('#error-msg-cont');
+        var passwordsMatch = app.helpers.passwordsMatch($inputPassword, $confirmPassword);
+        var errorMsg = '';
 
         if(passwordsMatch === true && $inputPassword.length >= 6){
-          console.log('pass ok');
           app.firebaseUsers.createUser({
             email: $inputEmail,
             password: $inputPassword
           }, function(error, userData) {
             if (error) {
+
               switch (error.code) {
                 case 'EMAIL_TAKEN':
-                  console.log('The new user account cannot be created because the email is already in use.');
+                  errorMsg += '* The new user account cannot be created because the email is already in use.';
                   break;
                 case 'INVALID_EMAIL':
-                  console.log('The specified email is not a valid email.');
+                  errorMsg += '* The specified email is not a valid email.';
                   break;
                 default:
-                  console.log('Error creating user:', error);
+                  errorMsg = 'Error creating user:' + error;
               }
+
             } else {
-              console.log('Successfully created user account with uid:', userData.uid);
+              var successfullyRegisteredMsg = '<p class="text-center">Your account has been successfully created. Please <strong>Log In</strong> !</p>';
+              $('#form-cont').html('').append(successfullyRegisteredMsg);
             }
+
+            $('#inputPassword').val('');
+            $('#inputPasswordConfirm').val('');
+            $errorCont.html('').append(errorMsg);
             app.helpers.spinner($('#spinner-cont'), 'remove');
           });
+
         } else {
-          console.log('password dont match or is not longer than 6 letters');
+
+          if(passwordsMatch === true){
+            errorMsg = '* Password must be at least 6 characters!';
+          }else{
+            errorMsg = '* Passwords do not match!';
+          }
+
+          $('#inputPassword').val('');
+          $('#inputPasswordConfirm').val('');
+          $errorCont.html('').append(errorMsg);
           app.helpers.spinner($('#spinner-cont'), 'remove');
+
         }// passwordsMatch
+
 
       }); // submit
 
