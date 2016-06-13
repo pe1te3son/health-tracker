@@ -55,6 +55,10 @@ var app = app || {};
               app.currentDate.day =  this.getMoment().format('D');
               app.currentDate.dayOfWeek =  this.getMoment().format('dddd');
               app.currentDate.daysThisMonth = this.getMoment().daysInMonth();
+              // Stop all listeners in current saved food view
+              // and then reintialize view with new database 
+              app.savedFoodView.stopListening();
+              app.savedFoodCollection = new app.FirebaseFoodCol();
               app.savedFoodView.initialize();
               app.savedFoodView.render();
             },
@@ -71,11 +75,8 @@ var app = app || {};
             container: document.getElementById('datepicker-container'),
         });
 
-      // Display graph
-      app.showGraph();
-
       // Listens for window resize
-      // Rebuilds Graph without fetching data each time as data are saved when showGraph() has been called
+      // Rebuilds Graph without fetching data each time as data are saved when user is created has been called
       $(window).on('resize', function(){
          app.helpers.buildGraph(app.dataForGraph);
       });
@@ -174,7 +175,7 @@ var app = app || {};
         var $confirmPassword = $('#inputPasswordConfirm').val();
         var passwordsMatch = app.helpers.passwordMatch($inputPassword, $confirmPassword);
 
-        if(passwordsMatch === true){
+        if(passwordsMatch === true && $inputPassword.length >= 6){
           console.log('pass ok');
           app.firebaseUsers.createUser({
             email: $inputEmail,
@@ -197,8 +198,10 @@ var app = app || {};
             app.helpers.spinner($('#spinner-cont'), 'remove');
           });
         } else {
-          console.log('password dont match');
+          console.log('password dont match or is not longer than 6 letters');
+          app.helpers.spinner($('#spinner-cont'), 'remove');
         }// passwordsMatch
+
       }); // submit
 
         this.switchForms(this.$formContainer, 'register');
@@ -218,6 +221,7 @@ var app = app || {};
           app.userId = this.authData.uid;
           $loginControls.html('').append(this.loginControlsTemplate({ loggedIn: true }));
           this.$logOutBtn = $('#log-out');
+          app.savedFoodCollection = new app.FirebaseFoodCol();
           // Initializes View which displays saved food
           app.savedFoodView = new app.SavedFoodView();
           this.switchForms(this.$formContainer, 'none');
@@ -229,9 +233,12 @@ var app = app || {};
           this.$formContainer = $('#form-cont');
           this.$registerBtn = $('#register');
           this.$loginBtn =   $('#login');
+          app.savedFoodCollection = new app.FirebaseFoodCol();
           app.savedFoodView = new app.SavedFoodView();
 
         }
+
+        app.showGraph();
     }
 
   });

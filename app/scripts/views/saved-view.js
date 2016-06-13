@@ -15,38 +15,32 @@ var app = app || {};
     el: '#saved-food-view',
 
     initialize: function(){
-      this.collection = new app.FirebaseFoodCol();
       this.$list = $('#saved-food-list');
       this.$caloriesContainer = $('#all-calories');
       this.$dateHolder = $('#date-today');
-      this.listenTo(this.collection, 'add', this.render);
+      this.listenTo(app.savedFoodCollection, 'add', this.addOne);
 
-      // Counts and updates calories sum each time food is added to colection
+      // Counts and updates calories sum each time food is added or removed from colection
       this.displayCaloriesSum();
-
-      // Updates selected date
-      this.displayCurentDate();
-
     },
 
     render: function(){
       this.$list.html('');
-      this.collection.each(this.addOne, this);
-      this.displayCaloriesSum();
+      app.savedFoodCollection.each(this.addOne, this);
+
+      // Updates selected date
+      this.displayCurentDate();
     },
 
     addOne: function(food){
       var foodview = new app.SavedSingleView({model: food});
       this.$list.prepend(foodview.render().el);
-    },
-
-    createModel: function(food){
-      this.collection.create(food.model.toJSON());
+      this.displayCaloriesSum();
     },
 
     // Counts calories for each day
     displayCaloriesSum: function(){
-      var caloriesSum = this.collection.countAll();
+      var caloriesSum = app.savedFoodCollection.countAll();
       var calFormated = parseFloat(caloriesSum).toFixed(1)
       this.$caloriesContainer.html('');
       this.$caloriesContainer.html(calFormated);
