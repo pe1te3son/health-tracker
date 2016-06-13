@@ -32,7 +32,7 @@ var app = app || {};
       app.firebaseUsers = new Firebase(app.firebaseUrl);
 
       // If User is not logged in, set "Default"
-      this.createUser();
+      this.healthTrackerCreateUser();
 
       // Initializes the View to display search results
       app.searchView = new app.SearchView();
@@ -116,6 +116,7 @@ var app = app || {};
         e.preventDefault();
         app.helpers.spinner($('#spinner-cont'), 'insert');
 
+        var $errorCont = $('.error-msg-cont');
         var $loginEmail = $('#inputEmail').val();
         var $loginPassword = $('#inputPassword').val();
         app.firebaseUsers.authWithPassword({
@@ -137,7 +138,7 @@ var app = app || {};
                           console.log('Error logging user in:', error);
                   }
               } else {
-                  self.createUser();
+                  self.healthTrackerCreateUser();
                   app.savedFoodView.render();
                   app.showGraph();
               }
@@ -205,11 +206,11 @@ var app = app || {};
 
     logOut: function(){
       app.firebaseUsers.unauth();
-      this.createUser();
+      this.healthTrackerCreateUser();
       app.showGraph();
     },
 
-    createUser: function(){
+    healthTrackerCreateUser: function(){
         this.authData = app.firebaseUsers.getAuth();
         var $loginControls = $('#login-controls');
         if(this.authData !== null){
