@@ -49,9 +49,8 @@
 
             <div class="col-sm-6 navigation-form">
 
-              <ul class="nav-list text-xs-center">
-                <li class="nav-item" id="login">Log in</li>
-                <li class="nav-item" id="register">Register</li>
+              <ul id="login-controls" class="nav-list text-xs-center">
+
               </ul>
 
               <div id="form-wrapper">
@@ -143,6 +142,15 @@
 
       </footer>
     </div><!-- wrapper/app ends -->
+
+    <script type="text/template" id="login-controls-template">
+      <% if (loggedIn) { %>
+        <li class="nav-item" id="log-out">Log Out</li>
+      <% } else { %>
+        <li class="nav-item" id="login">Log in</li>
+        <li class="nav-item" id="register">Register</li>
+      <% } %>
+    </script>
 
     <script type="text/template" id="saved-single-template">
       <div class="col-xs-10">

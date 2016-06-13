@@ -9,18 +9,17 @@ var app = app || {};
     el: '#app',
 
     loginFormTemplate: _.template($('#login-form-template').html()),
+    loginControlsTemplate: _.template($('#login-controls-template').html()),
 
     events: {
       'click #testone': 'render',
       'click #login': 'loginForm',
-      'click #register': 'registerForm'
+      'click #register': 'registerForm',
+      'click #log-out': 'logOut'
     },
 
     initialize: function(){
-      this.$formContainer = $('#form-cont');
-      this.$registerBtn = $('#register');
-      this.$loginBtn =   $('#login');
-      app.userId = 'default';
+
       app.currentDate = {
         graphPrefix: moment().format('YYYY-M-'),
         year: moment().format('YYYY'),
@@ -30,10 +29,11 @@ var app = app || {};
         daysThisMonth: moment().daysInMonth()
       };
 
+      // Users Acounts
       app.firebaseUsers = new Firebase(app.firebaseUrl);
 
-      // Initializes View which displays saved food
-      app.savedFoodView = new app.SavedFoodView();
+      // If User is not logged in, set "Default"
+      this.createUser();
 
       // Initializes the View to display search results
       app.searchView = new app.SearchView();
@@ -57,6 +57,7 @@ var app = app || {};
               app.currentDate.dayOfWeek =  this.getMoment().format('dddd');
               app.currentDate.daysThisMonth = this.getMoment().daysInMonth();
               app.savedFoodView.initialize();
+              app.savedFoodView.render();
 
             },
             onDraw: function(){
@@ -82,8 +83,16 @@ var app = app || {};
       });
     },// initialize ends
 
-    switchData: function(container, attrVal){
-      if(container.attr('data') === attrVal){
+    switchForms: function(container, attrVal){
+      if(attrVal === 'none'){
+
+        if(typeof container === 'undefined'){
+          console.log(container);
+        } else {
+          container.slideUp('fast');
+        }
+
+      }else if(container.attr('data') === attrVal){
         container.slideUp('fast');
         container.attr('data', '');
       } else if(container.attr('data') !== attrVal && container.attr('data') != '' ){
@@ -96,12 +105,13 @@ var app = app || {};
 
     },
 
-    loginForm: function(e){
-      this.$registerBtn.removeClass('form-selected');
+    loginForm: function(){
+      var self = this;
+      self.$registerBtn.removeClass('form-selected');
 
-      this.$loginBtn.toggleClass('form-selected');
+      self.$loginBtn.toggleClass('form-selected');
 
-      this.$formContainer.html('').append(this.loginFormTemplate(
+      self.$formContainer.html('').append(self.loginFormTemplate(
         {
           login: true,
           id: 'login'
@@ -110,7 +120,6 @@ var app = app || {};
 
       $('#login-form').on('submit', function(e){
         e.preventDefault();
-
         app.helpers.spinner($('#spinner-cont'), 'insert');
 
         var $loginEmail = $('#inputEmail').val();
@@ -135,8 +144,9 @@ var app = app || {};
                   }
               } else {
                   console.log('loged in');
-                  app.userId = authData.uid;
-                  app.savedFoodView = new app.SavedFoodView();
+                  // app.userId = authData.uid;
+                  // app.savedFoodView = new app.SavedFoodView();
+                  self.createUser();
                   app.savedFoodView.render();
                   app.showGraph();
               }
@@ -144,8 +154,8 @@ var app = app || {};
               app.helpers.spinner($('#spinner-cont'), 'remove');
           });
       });
-
-      this.switchData(this.$formContainer, 'login');
+      //console.log(self.createUser());
+      self.switchForms(self.$formContainer, 'login');
 
     },
 
@@ -200,8 +210,38 @@ var app = app || {};
         }// passwordsMatch
       }); // submit
 
-        this.switchData(this.$formContainer, 'register');
-    }// registerForm ends
+        this.switchForms(this.$formContainer, 'register');
+    },// registerForm ends
+
+    logOut: function(){
+      app.firebaseUsers.unauth();
+      this.createUser();
+      app.showGraph();
+    },
+
+    createUser: function(){
+        this.authData = app.firebaseUsers.getAuth();
+        var $loginControls = $('#login-controls');
+        if(this.authData !== null){
+
+          app.userId = this.authData.uid;
+          $loginControls.html('').append(this.loginControlsTemplate({ loggedIn: true }));
+          this.$logOutBtn = $('#log-out');
+          // Initializes View which displays saved food
+          app.savedFoodView = new app.SavedFoodView();
+          this.switchForms(this.$formContainer, 'none');
+
+        }else{
+
+          app.userId = 'default';
+          $loginControls.html('').append(this.loginControlsTemplate({ loggedIn: false }));
+          this.$formContainer = $('#form-cont');
+          this.$registerBtn = $('#register');
+          this.$loginBtn =   $('#login');
+          app.savedFoodView = new app.SavedFoodView();
+
+        }
+    }
 
   });
 

@@ -18,27 +18,30 @@ var app = app || {};
       this.$list = $('#saved-food-list');
       this.$caloriesContainer = $('#all-calories');
       this.$dateHolder = $('#date-today');
-      this.listenTo(this.collection, 'remove', this.render);
-      this.listenTo(this.collection, 'add', this.render);
-      this.render();
+      this.listenTo(this.collection, 'add', this.addOne);
+      //this.listenTo(this.collection, 'sync', this.render);
+
     },
 
     render: function(){
       this.$list.html('');
-      this.collection.each(function(item){
 
-        var foodview = new app.SavedSingleView({model: item});
-        this.$list.append(foodview.render().el);
+      this.collection.each(this.addOne, this);
 
-      }.bind(this));
-
-      // Counts and updates calories each time data are upated and saves them
+      // Counts and updates calories sum each time food is added to colection
       this.displayCaloriesSum();
+
       // Updates selected date
       this.displayCurentDate();
     },
 
     addOne: function(food){
+      var foodview = new app.SavedSingleView({model: food});
+      this.$list.prepend(foodview.render().el);
+      this.displayCaloriesSum();
+    },
+
+    createModel: function(food){
       this.collection.create(food.model.toJSON());
     },
 

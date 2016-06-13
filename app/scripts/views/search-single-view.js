@@ -22,7 +22,7 @@ var app = app || {};
 
     },
     foodClicked: function(){
-      app.savedFoodView.addOne(this);
+      app.savedFoodView.createModel(this);
     }
 
 

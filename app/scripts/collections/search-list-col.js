@@ -17,7 +17,7 @@ var app = app || {};
     url: function() {
       var url = 'https://api.nutritionix.com/v1_1/search/',
           input = this.inputVal,
-          results = '?results=0%3A31&cal_min=0&cal_max=50000',
+          results = '?results=0%3A11&cal_min=0&cal_max=50000',
           fields = '&fields=item_name%2Cbrand_name%2cnf_calories',
           id = '&appId=9fbd69c5',
           key = '&appKey=4654813d6d125572f15f30d534dceb88';
