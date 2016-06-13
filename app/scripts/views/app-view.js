@@ -12,7 +12,6 @@ var app = app || {};
     loginControlsTemplate: _.template($('#login-controls-template').html()),
 
     events: {
-      'click #testone': 'render',
       'click #login': 'loginForm',
       'click #register': 'registerForm',
       'click #log-out': 'logOut'
@@ -58,7 +57,6 @@ var app = app || {};
               app.currentDate.daysThisMonth = this.getMoment().daysInMonth();
               app.savedFoodView.initialize();
               app.savedFoodView.render();
-
             },
             onDraw: function(){
               // Each time new month is selected this function rerenders graph
@@ -86,9 +84,7 @@ var app = app || {};
     switchForms: function(container, attrVal){
       if(attrVal === 'none'){
 
-        if(typeof container === 'undefined'){
-          console.log(container);
-        } else {
+        if(typeof container !== 'undefined'){
           container.slideUp('fast');
         }
 
@@ -108,9 +104,7 @@ var app = app || {};
     loginForm: function(){
       var self = this;
       self.$registerBtn.removeClass('form-selected');
-
       self.$loginBtn.toggleClass('form-selected');
-
       self.$formContainer.html('').append(self.loginFormTemplate(
         {
           login: true,
@@ -143,9 +137,6 @@ var app = app || {};
                           console.log('Error logging user in:', error);
                   }
               } else {
-                  console.log('loged in');
-                  // app.userId = authData.uid;
-                  // app.savedFoodView = new app.SavedFoodView();
                   self.createUser();
                   app.savedFoodView.render();
                   app.showGraph();
@@ -154,7 +145,6 @@ var app = app || {};
               app.helpers.spinner($('#spinner-cont'), 'remove');
           });
       });
-      //console.log(self.createUser());
       self.switchForms(self.$formContainer, 'login');
 
     },

@@ -5,6 +5,12 @@ var ENTER_KEY = 13;
 $(function(){
   'use strict';
   app.firebaseUrl = 'https://health-tracker-janak.firebaseio.com/';
+
+  Backbone.View.prototype.close = function() {
+    this.undelegateEvents();
+    //this.remove();
+  };
+
   app.helpers = {
     buildGraph: function(data){
       var self = this;

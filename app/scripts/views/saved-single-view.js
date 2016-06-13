@@ -14,6 +14,10 @@ var app = app || {};
       'click': 'foodClicked'
     },
 
+    initialize: function(){
+      this.listenTo(this.model, 'destroy', this.remove);
+    },
+
     render: function(){
       this.$el.html(this.singleFoodTemplate(this.model.attributes));
       return this;
@@ -22,6 +26,7 @@ var app = app || {};
 
     foodClicked: function(){
       this.model.destroy();
+      app.savedFoodView.displayCaloriesSum();
     },
 
 

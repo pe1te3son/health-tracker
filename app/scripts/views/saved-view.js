@@ -13,32 +13,31 @@ var app = app || {};
 
   app.SavedFoodView = Backbone.View.extend({
     el: '#saved-food-view',
+
     initialize: function(){
       this.collection = new app.FirebaseFoodCol();
       this.$list = $('#saved-food-list');
       this.$caloriesContainer = $('#all-calories');
       this.$dateHolder = $('#date-today');
-      this.listenTo(this.collection, 'add', this.addOne);
-      //this.listenTo(this.collection, 'sync', this.render);
-
-    },
-
-    render: function(){
-      this.$list.html('');
-
-      this.collection.each(this.addOne, this);
+      this.listenTo(this.collection, 'add', this.render);
 
       // Counts and updates calories sum each time food is added to colection
       this.displayCaloriesSum();
 
       // Updates selected date
       this.displayCurentDate();
+
+    },
+
+    render: function(){
+      this.$list.html('');
+      this.collection.each(this.addOne, this);
+      this.displayCaloriesSum();
     },
 
     addOne: function(food){
       var foodview = new app.SavedSingleView({model: food});
       this.$list.prepend(foodview.render().el);
-      this.displayCaloriesSum();
     },
 
     createModel: function(food){
