@@ -92,15 +92,16 @@ var app = app || {};
       */
       if($attrVal === 'none'){
 
-        $container.attr('data', '');
+
         if(typeof $container !== 'undefined'){
           $container.slideUp(100);
+          $container.attr('data', '');
         }
 
       }else if($container.attr('data') === $attrVal){
         $container.slideUp(100);
         $container.attr('data', '');
-      } else if($container.attr('data') !== $attrVal && $container.attr('data') != '' ){
+      } else if($container.attr('data') !== $attrVal && $container.attr('data') !== '' ){
         $container.slideUp(100).slideDown('fast');
         $container.attr('data', $attrVal);
       }else{
@@ -120,6 +121,8 @@ var app = app || {};
           id: 'login'
         }
       ));
+
+      self.switchForms(self.$formContainer, 'login');
 
       $('#login-form').on('submit', function(e){
         e.preventDefault();
@@ -150,15 +153,19 @@ var app = app || {};
 
                   $errorCont.html('').append(errorMsg);
               } else {
+                  self.$formContainer.html('').append('<p class="text-center">You are now Logged In. Welcome!</p>');
                   self.healthTrackerCreateUser();
                   app.savedFoodView.render();
                   app.showGraph();
+
+                  setTimeout(function(){
+                    self.switchForms(self.$formContainer, 'none');
+                  }, 3000);
               }
 
               app.helpers.spinner($('#spinner-cont'), 'remove');
           });
       });
-      self.switchForms(self.$formContainer, 'login');
 
     },
 
@@ -255,7 +262,6 @@ var app = app || {};
           app.savedFoodCollection = new app.FirebaseFoodCol();
           // Initializes View which displays saved food
           app.savedFoodView = new app.SavedFoodView();
-          this.switchForms(this.$formContainer, 'none');
 
         }else{
 

@@ -22,14 +22,15 @@ var app = app || {};
 
       // Counts and updates calories sum each time food is added or removed from colection
       this.displayCaloriesSum();
+
+      // Updates selected date
+      this.displayCurentDate();
     },
 
     render: function(){
       this.$list.html('');
       app.savedFoodCollection.each(this.addOne, this);
 
-      // Updates selected date
-      this.displayCurentDate();
     },
 
     addOne: function(food){
