@@ -16,7 +16,6 @@ $(function(){
       var self = this;
 
       $('#chartdiv').html('');
-      $.jqplot.config.enablePlugins = true;
       $.jqplot('chartdiv',
         [
           data
@@ -78,7 +77,7 @@ $(function(){
 
 
         });
-
+        $.jqplot.config.enablePlugins = true;
     },//buildGraph ends
 
     setFirstDay: function(){
@@ -138,6 +137,7 @@ $(function(){
         }
         // Build graph
         app.helpers.buildGraph(app.dataForGraph);
+        $('#chartdiv').addClass('animated fadeInUp');
 
       },// success ends
       error: function(){
