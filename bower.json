@@ -7,7 +7,8 @@
     "backbone": "^1.3.3",
     "moment": "^2.13.0",
     "pikaday": "^1.4.0",
-    "font-awesome": "fontawesome#^4.6.3"
+    "font-awesome": "fontawesome#^4.6.3",
+    "bourbon": "^4.2.7"
   },
   "overrides": {
     "bootstrap-sass": {
