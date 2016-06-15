@@ -4,7 +4,7 @@
 
 Simple application which is tracking calories intake. It searches through nutritionix api database for food and drinks which are saved into Firebase database when selected. It displays daily sum of calories as well as chart for month selected.
 
-[Visit online](pe1te3son.github.io/health-tracker/)
+[Visit online](http://pe1te3son.github.io/health-tracker/)
 
 _The app is fully functional without logging in or registering, however I recommend to register so it tracks your selection of food or drinks._
 
