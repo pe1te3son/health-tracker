@@ -19,7 +19,7 @@ var app = app || {};
       this.$dateHolder = $('#date-today');
       this.listenTo(app.savedFoodCollection, 'add', this.render);
 
-      // Counts and updates calories sum each time food is added or removed from colection
+      // Counts and updates calories sum each time food is added or removed from collection
       this.displayCaloriesSum();
 
       // Updates selected date

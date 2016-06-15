@@ -110,7 +110,7 @@ $(function(){
       var opt = $option;
 
       if(opt === 'insert'){
-        cont.append('<i class="fa fa-spinner fa-spin fa-lg"></i><span class="sr-only">Loading...</span>');
+        cont.append('<div class="spinner-wrapper"><i class="fa fa-spinner fa-spin fa-lg loading-spinner"></i><span class="sr-only">Loading...</span></div>');
       } else if(opt === 'remove'){
         cont.html('');
       }

@@ -15,16 +15,24 @@
   margin: 20px 0
   height: 300px
   overflow: hidden
+  text-align: center
   &:hover
     overflow: auto
   li
     padding: 3px
+    text-align: left
     &:nth-child(odd)
       background: darken($color2, 5%)
     &:hover
       cursor: pointer
       background: $color3
       color: $color2
+  .spinner-wrapper
+    width: 100%
+    color: $color1
+    font-size: 2em
+    padding-top: 60px
+
 
 .search-controls
   font-size: 1.2em

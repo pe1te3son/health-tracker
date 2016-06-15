@@ -1,8 +1,8 @@
 /**
   * Search View
-  *  @desc This view is bind with search-list-col.js (colection). It mainly takes care of
+  *  @desc This view is bind with search-list-col.js (collection). It mainly takes care of
   *  updating data which are retrieved from Nutritionix. It automaticly searches for
-  *  food on each letter entered. Colection is formating recevied data.
+  *  food on each letter entered. Collection is formating recevied data.
 
 */
 var app = app || {};
@@ -21,24 +21,24 @@ var app = app || {};
     },
 
     initialize: function(){
-      this.colection = new app.SearchListCol();
+      this.collection = new app.SearchListCol();
       this.$searchControls = $('.search-controls');
       this.$searchField = $('#search-input');
       this.$list = $('#search-result-list');
       this.$listContainer = $('.search-result-cont');
       this.$datepicker = $('#datepicker');
-      this.listenTo(this.colection, 'sync', this.render);
+      this.listenTo(this.collection, 'sync', this.render);
       this.$datepickerBtn = $('#datepicker-btn');
       this.$searchListBtn = $('#search-list-btn');
       this.$searchMenuToggleBtn = $('#search-menu-toggle-btn').children().first();
-
     },
 
     searchData: function(){
       var self = this;
 
-      self.showSearchList();
-
+      this.showSearchList();
+      this.$list.html('');
+      app.helpers.spinner(this.$list, 'insert');
       // Blocks page from reloading in case user presses Enter
       this.$searchField.keydown(function(e){
         if(e.which === ENTER_KEY){
@@ -47,10 +47,10 @@ var app = app || {};
       });
 
       // Sets value of input field to collections
-      this.colection.setInputVal(this.$searchField.val());
+      this.collection.setInputVal(this.$searchField.val());
 
       // Then fetches a data
-      this.colection.fetch({
+      this.collection.fetch({
         error: function(){
           console.log('NO CONECTION');
           self.$list.html('');
@@ -63,7 +63,7 @@ var app = app || {};
 
       this.$list.html('');
 
-      this.colection.each(function(item){
+      this.collection.each(function(item){
 
         var foodview = new app.SearchSingleView({model: item});
         this.$list.append(foodview.render().el);
