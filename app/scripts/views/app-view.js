@@ -1,3 +1,5 @@
+// Defult application view
+
 var app = app || {};
 
 (function($){
@@ -48,6 +50,7 @@ var app = app || {};
             yearRange: 5,
             bound: false,
             onSelect: function() {
+
               // Each time new date is selected this function updates view
               app.currentDate.graphPrefix = this.getMoment().format('YYYY-M-'),
               app.currentDate.year = this.getMoment().format('YYYY');
@@ -55,12 +58,10 @@ var app = app || {};
               app.currentDate.day =  this.getMoment().format('D');
               app.currentDate.dayOfWeek =  this.getMoment().format('dddd');
               app.currentDate.daysThisMonth = this.getMoment().daysInMonth();
-              // Stop all listeners in current saved food view
-              // and then reintialize view with new database
-              app.savedFoodView.stopListening();
               app.savedFoodCollection = new app.FirebaseFoodCol();
               app.savedFoodView.initialize();
               app.savedFoodView.render();
+
             },
             onDraw: function(){
               // Each time new month is selected this function rerenders graph
@@ -112,6 +113,9 @@ var app = app || {};
     },
 
     loginForm: function(){
+
+      // Logs in user
+
       var self = this;
       self.$registerBtn.removeClass('form-selected');
       self.$loginBtn.toggleClass('form-selected');
@@ -155,6 +159,7 @@ var app = app || {};
               } else {
                   self.$formContainer.html('').append('<p class="text-center">You are now Logged In. Welcome!</p>');
                   self.healthTrackerCreateUser();
+                  app.savedFoodView.initialize();
                   app.savedFoodView.render();
                   app.showGraph();
 
@@ -170,6 +175,9 @@ var app = app || {};
     },
 
     registerForm: function(){
+
+      // Registers new user
+
       this.$loginBtn.removeClass('form-selected');
 
       if(!this.$registerBtn.hasClass('form-selected')){
@@ -248,6 +256,8 @@ var app = app || {};
     logOut: function(){
       app.firebaseUsers.unauth();
       this.healthTrackerCreateUser();
+      app.savedFoodView.initialize();
+      app.savedFoodView.render();
       app.showGraph();
     },
 

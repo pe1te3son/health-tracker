@@ -3,22 +3,22 @@ var app = app || {};
 var ENTER_KEY = 13;
 
 $(function(){
-  'use strict';
+  'use strict'
   app.firebaseUrl = 'https://health-tracker-janak.firebaseio.com/';
 
-  Backbone.View.prototype.close = function() {
-    this.undelegateEvents();
-    //this.remove();
-  };
-
   app.helpers = {
-    buildGraph: function(data){
+    /**
+      * Jqplot
+      * @desc builds graph each time it is called
+      * @param array $data - x and y axis values inside an array [[x, y], [x, y]];
+    */
+    buildGraph: function($data){
       var self = this;
 
       $('#chartdiv').html('');
       $.jqplot('chartdiv',
         [
-          data
+          $data
         ],
         {
           title:{
@@ -85,8 +85,14 @@ $(function(){
       return startDay;
     },
 
-    passwordsMatch: function(pass1, pass2){
-      if(pass1 === pass2){
+    passwordsMatch: function($pass1, $pass2){
+      /**
+        * @desc compares passwords
+        * @param string $pass1 and string $pass2
+        * @return bool - pass or fail
+      */
+
+      if($pass1 === $pass2){
         return true;
       }else{
         return false;

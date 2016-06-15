@@ -3,6 +3,7 @@
 
 #search-view
   padding-top: 20px
+  height: em(520px)
 
 .brand-name
   font-style: italic
@@ -27,12 +28,13 @@
 
 .search-controls
   font-size: 1.2em
-  margin: 30px 0 0
+  margin: 31px 0 0
   padding-left: 15px
 
-.search-control
-  padding: 6px 20px
+.panel-control
+  padding: 6px 15px
   border-radius: 5px
+  margin-right: 5px
   background: $color1
   color: $color2
   box-shadow: 1px 1px 1px #666
@@ -41,7 +43,7 @@
     background: $color3
     color: $color2
 
-.selected-btn-search-view
+.selected-panel
   background: $color3
   color: $color2
   box-shadow: none
@@ -65,3 +67,14 @@
   border: none
   &:hover
     background: lighten($color5, 5%)
+
+#warning-btn
+  float: right
+  border-radius: 5px
+  padding: 5px 20px
+  margin-right: 20px
+  color: tomato
+  border: 2px solid
+  &:hover
+    cursor: pointer
+    color: lighten(tomato, 5%)

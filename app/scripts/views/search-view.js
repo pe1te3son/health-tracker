@@ -1,9 +1,8 @@
 /**
-  Search View
-
-  This view is bind with search-list-col.js (colection). It mainly takes care of
-  updating data which are retrieved from Nutritionix. It automaticly searches for
-  food on each letter entered. Colection is formating recevied data.
+  * Search View
+  *  @desc This view is bind with search-list-col.js (colection). It mainly takes care of
+  *  updating data which are retrieved from Nutritionix. It automaticly searches for
+  *  food on each letter entered. Colection is formating recevied data.
 
 */
 var app = app || {};
@@ -23,6 +22,7 @@ var app = app || {};
 
     initialize: function(){
       this.colection = new app.SearchListCol();
+      this.$searchControls = $('.search-controls');
       this.$searchField = $('#search-input');
       this.$list = $('#search-result-list');
       this.$listContainer = $('.search-result-cont');
@@ -31,7 +31,6 @@ var app = app || {};
       this.$datepickerBtn = $('#datepicker-btn');
       this.$searchListBtn = $('#search-list-btn');
       this.$searchMenuToggleBtn = $('#search-menu-toggle-btn').children().first();
-
 
     },
 
@@ -79,16 +78,16 @@ var app = app || {};
     },
 
     showCalendar: function(e){
-      this.$searchListBtn.removeClass('selected-btn-search-view');
-      this.$datepickerBtn.addClass('selected-btn-search-view');
+      this.$searchListBtn.removeClass('selected-panel');
+      this.$datepickerBtn.addClass('selected-panel');
       this.$datepicker.show();
       this.$listContainer.hide();
 
     },
 
     showSearchList: function(){
-      this.$datepickerBtn.removeClass('selected-btn-search-view');
-      this.$searchListBtn.addClass('selected-btn-search-view');
+      this.$datepickerBtn.removeClass('selected-panel');
+      this.$searchListBtn.addClass('selected-panel');
       this.$datepicker.hide();
       this.$listContainer.show();
     },

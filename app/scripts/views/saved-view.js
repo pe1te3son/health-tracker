@@ -1,8 +1,7 @@
 /**
-  Saved items View
-
-  Controls all food saved in database. Displays sum for everyday, adds and deletes
-  each food item when clicked on.
+  * Saved items View
+  * @desc Controls all food saved in database. Displays sum for everyday,
+  * adds and deletes each food item when clicked on.
 */
 
 
@@ -18,7 +17,7 @@ var app = app || {};
       this.$list = $('#saved-food-list');
       this.$caloriesContainer = $('#all-calories');
       this.$dateHolder = $('#date-today');
-      this.listenTo(app.savedFoodCollection, 'add', this.addOne);
+      this.listenTo(app.savedFoodCollection, 'add', this.render);
 
       // Counts and updates calories sum each time food is added or removed from colection
       this.displayCaloriesSum();
@@ -30,13 +29,13 @@ var app = app || {};
     render: function(){
       this.$list.html('');
       app.savedFoodCollection.each(this.addOne, this);
-
+      this.displayCaloriesSum();
+      return this;
     },
 
     addOne: function(food){
       var foodview = new app.SavedSingleView({model: food});
       this.$list.prepend(foodview.render().el);
-      this.displayCaloriesSum();
     },
 
     // Counts calories for each day
