@@ -151,7 +151,7 @@ $(function(){
       }
     });
 
-  }// showGraph ends
+  };// showGraph ends
 
   // Create an App
   new app.AppView();

@@ -41,7 +41,7 @@ var app = app || {};
     // Counts calories for each day
     displayCaloriesSum: function(){
       var caloriesSum = app.savedFoodCollection.countAll();
-      var calFormated = parseFloat(caloriesSum).toFixed(1)
+      var calFormated = parseFloat(caloriesSum).toFixed(1);
       this.$caloriesContainer.html('');
       this.$caloriesContainer.html(calFormated);
 
