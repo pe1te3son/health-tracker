@@ -52,7 +52,7 @@ var app = app || {};
             onSelect: function() {
 
               // Each time new date is selected this function updates view
-              app.currentDate.graphPrefix = this.getMoment().format('YYYY-M-'),
+              app.currentDate.graphPrefix = this.getMoment().format('YYYY-M-');
               app.currentDate.year = this.getMoment().format('YYYY');
               app.currentDate.month = this.getMoment().format('MMMM');
               app.currentDate.day =  this.getMoment().format('D');
@@ -73,7 +73,7 @@ var app = app || {};
               }
 
             },
-            container: document.getElementById('datepicker-container'),
+            container: document.getElementById('datepicker-container')
         });
 
       // Listens for window resize

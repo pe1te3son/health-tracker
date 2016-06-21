@@ -3,7 +3,7 @@ var app = app || {};
 var ENTER_KEY = 13;
 
 $(function(){
-  'use strict'
+  'use strict';
   app.firebaseUrl = 'https://health-tracker-janak.firebaseio.com/';
 
   app.helpers = {
